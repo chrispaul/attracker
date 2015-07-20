@@ -1,4 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+class Hiker(models.Model):
+    user = models.OneToOneField(User)
+    trail_name = models.CharField('Trail name', max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.trail_name
 
 class Segment(models.Model):
     start_mile = models.FloatField('Starting Nobo mile post', default=0)
@@ -8,6 +16,7 @@ class Segment(models.Model):
     picture_url = models.CharField('Link to pictures', max_length=300, null=True, blank=True)
     additional_miles = models.FloatField('Non-AT miles hiked with the segment', default=0)
     date = models.DateTimeField('Date segment was hiked')
+    hiker = models.ForeignKey(Hiker)
 
     @property
     def distance(self):
