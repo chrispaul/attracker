@@ -6,15 +6,15 @@ from .models import AppalachianTrail, Segment, Hiker
 
 admin.site.register(AppalachianTrail)
 
-admin.site.register(Hiker)
 
+class SegmentInline(admin.TabularInline):
+    model = Segment
+    extra = 0
 
-class SegmentAdmin(admin.ModelAdmin):
-    #fields = ['date', 'start_mile', 'end_mile']
+class HikerAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Miles traveled', {'fields': ['start_mile', 'end_mile']}),
-        (None,               {'fields': ['date', 'description', 'hiker']}),
-        ('Other info', {'fields': ['additional_miles', 'video_url', 'picture_url'], 'classes': ['collapse']}),
+        (None,               {'fields': ['trail_name', 'user']}),
     ]
+    inlines = [SegmentInline]
 
-admin.site.register(Segment, SegmentAdmin)
+admin.site.register(Hiker, HikerAdmin)
