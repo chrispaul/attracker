@@ -5,9 +5,11 @@ class Hiker(models.Model):
     user = models.OneToOneField(User)
     trail_name = models.CharField('Trail name', max_length=200, null=True, blank=True)
 
-    @property
-    def number_segments(self):
+    def num_segments(self):
         return self.segment_set.count()
+    num_segments.short_description = 'Number of segments hiked'
+
+    number_segments = property(num_segments)
 
     def __str__(self):
         return "{} (segments: {})".format(self.trail_name, self.number_segments)
