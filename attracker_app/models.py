@@ -33,7 +33,7 @@ class Segment(models.Model):
         return self.end_mile - self.start_mile
 
     def __str__(self):
-        return "Start @ mile {} for {} miles".format(self.start_mile, self.distance)
+        return "Start @ mile {0} for {1:.1f} miles".format(self.start_mile, self.distance)
 
 class AppalachianTrail(models.Model):
     miles = models.FloatField('Total number of miles in AT', default=2184.2)
