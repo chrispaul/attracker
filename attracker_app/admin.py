@@ -12,6 +12,7 @@ class SegmentInline(admin.TabularInline):
     extra = 0
 
 class HikerAdmin(admin.ModelAdmin):
+    list_display = ('trail_name', 'number_segments')
     fieldsets = [
         (None,               {'fields': ['trail_name', 'user']}),
     ]
