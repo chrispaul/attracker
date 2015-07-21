@@ -11,6 +11,10 @@ class Hiker(models.Model):
 
     number_segments = property(num_segments)
 
+    @property
+    def full_name(self):
+        return self.user.get_full_name()
+
     def __str__(self):
         return "{} (segments: {})".format(self.trail_name, self.number_segments)
 

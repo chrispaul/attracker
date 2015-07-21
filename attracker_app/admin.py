@@ -12,7 +12,8 @@ class SegmentInline(admin.TabularInline):
     extra = 0
 
 class HikerAdmin(admin.ModelAdmin):
-    list_display = ('trail_name', 'number_segments')
+    list_display = ('trail_name', 'full_name', 'number_segments')
+    search_fields = ['trail_name','user__last_name','user__first_name']
     fieldsets = [
         (None,               {'fields': ['trail_name', 'user']}),
     ]
