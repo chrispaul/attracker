@@ -5,6 +5,7 @@ from django.contrib import admin
 from .models import AppalachianTrail, Segment, Hiker
 
 admin.site.register(AppalachianTrail)
+admin.site.site_header = 'AT Tracker Admin'
 
 
 class SegmentInline(admin.TabularInline):
