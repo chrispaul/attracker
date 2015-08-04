@@ -1,2 +1,32 @@
 <h1>Hiker: {{ hiker.trail_name }} </h1>
-{{ hiker }}
+
+<div id="table">
+  <table border=1>
+    <thead>
+        <tr>
+           <th>Date</th>
+           <th>Start mile</th>
+           <th>End mile</th>
+           <th>Description</th>
+           <th>Video</th>
+           <th>Pictures</th>
+           <th>Additional miles</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for segment in segments %}
+          <tr>
+              <td>{{ segment.date }}</td>
+              <td>{{ segment.start_mile }}</td>
+              <td>{{ segment.end_mile }}</td>
+              <td>{{ segment.description }}</td>
+              <td>{{ segment.video_url }}</td>
+              <td>{{ segment.picture_url }}</td>
+              <td>{{ segment.additional_miles }}</td>
+          </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br>
+Segments: {{ hiker.number_segments }}

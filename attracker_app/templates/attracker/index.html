@@ -2,7 +2,7 @@
 {% if hikers %}
     <ul>
     {% for hiker in hikers %}
-        <li><a href="{{ hiker.id }}/">{{ hiker.trail_name }}</a></li>
+      <li><a href="{% url 'hiker' hiker.id %}">{{ hiker.trail_name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

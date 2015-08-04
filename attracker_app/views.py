@@ -11,7 +11,7 @@ def index(request):
 
 def hiker(request, hiker_id):
     hiker = get_object_or_404(Hiker, pk=hiker_id)
-    return render(request, 'attracker/hiker.html', {'hiker': hiker})
+    return render(request, 'attracker/hiker.html', {'hiker': hiker, 'segments': hiker.segment_set.all() })
 
 
 
