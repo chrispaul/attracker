@@ -1,6 +1,8 @@
 <h1>Hiker: {{ hiker.trail_name }} </h1>
 
-{{ debug_info }} <br><br>
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
 
 <div id="table">
   <table border=1>
@@ -13,6 +15,7 @@
            <th>Video</th>
            <th>Pictures</th>
            <th>Additional miles</th>
+           <th>Delete segment</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +28,7 @@
               <td>{{ segment.video_url }}</td>
               <td>{{ segment.picture_url }}</td>
               <td>{{ segment.additional_miles }}</td>
+              <td><a href="{% url 'segment_delete' hiker.id segment.id %}">Delete Segment</a></td>
           </tr>
         {% endfor %}
     </tbody>

@@ -65,3 +65,28 @@ def segment_add_post(request, hiker_id):
         })
     else:
         return render(request, 'attracker/hiker.html', {'hiker': hiker, 'debug_info':debug_info})
+
+
+def segment_delete(request, hiker_id, segment_id):
+    start_mile = 0
+    try:
+        hiker = get_object_or_404(Hiker, pk=hiker_id)
+        segment = get_object_or_404(Segment, pk=segment_id)
+        if (hiker.id != segment.hiker.id):
+            # Redisplay the question voting form.
+            return render(request, 'attracker/hiker.html', {
+                'hiker': hiker,
+                'error_message': "Internal error:{0}:{1}:{2}.{3}".format(hiker_id.__class__, segment.hiker.id.__class__, segment_id,(hiker_id != segment.hiker.id))
+            })
+        start_mile = segment.start_mile
+        segment.delete()
+    except (KeyError, Choice.DoesNotExist):
+        # Redisplay the question voting form.
+        return render(request, 'attracker/segment_add.html', {
+            'error_message': "No such hiker/segment with ID {0}/{1}".format(hiker_id, segment_id),
+        })
+    return render(request, 'attracker/hiker.html', {
+        'hiker': hiker, 
+        'error_message': 'Segment starting at mile {0} deleted'.format(start_mile)
+    })
+
