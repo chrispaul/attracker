@@ -5,25 +5,35 @@
 {% else %}
     <form action="{% url 'segment_add' hiker.id %}" method="post">
         {% csrf_token %}
-        <label for="date">Date hiked (yyyy-mm-dd): </label>
         <input id="date" type="date" name="date">
+        <label for="date">Date hiked </label>
         <br>
 
-        <label for="start_mile">Start mile: </label>
         <input id="start_mile" name="start_mile" type="number">
-        <br>
+        <label for="start_mile">Start mile </label>
         <br>
 
+        <input id="end_mile" name="end_mile" type="number">
+        <label for="end_mile">End mile </label>
+        <br>
+
+        <input id="description" name="description" type="text">
+        <label for="description">Description </label>
+        <br>
+
+        <input id="video_url" name="video_url" type="text">
+        <label for="video_url">Video URL </label>
+        <br>
+
+        <input id="picture_url" name="picture_url" type="text">
+        <label for="picture_url">Picture URL </label>
+        <br>
+
+        <input id="additional_miles" name="additional_miles" type="number">
+        <label for="additional_miles">Additional miles </label>
+        <br>
+
+        <br>
         <input type="submit" value="OK">
     </form>
 {% endif %}
-
-<!--
-              <td>{{ segment.date }}</td>
-              <td>{{ segment.start_mile }}</td>
-              <td>{{ segment.end_mile }}</td>
-              <td>{{ segment.description }}</td>
-              <td>{{ segment.video_url }}</td>
-              <td>{{ segment.picture_url }}</td>
-              <td>{{ segment.additional_miles }}</td>
--->

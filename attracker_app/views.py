@@ -42,8 +42,26 @@ def segment_add_post(request, hiker_id):
         return render(request, 'attracker/segment_add.html', {
             'error_message': "No such hiker with ID {0}".format(hiker_id),
         })
+
+    date = request.POST['date']
+    start_mile = request.POST['start_mile']
+    debug_info = "You're adding a segment to hiker {0}, date={1}, start={2}".format(hiker.trail_name, date, start_mile) # TODO
+    try:
+        s = Segment(
+                hiker = hiker, 
+                date = request.POST['date'],
+                start_mile = request.POST['start_mile'], 
+                end_mile = request.POST['end_mile'], 
+                description = request.POST['description'], 
+                video_url = request.POST['video_url'], 
+                picture_url = request.POST['picture_url'], 
+                additional_miles = request.POST['additional_miles']
+                )
+        s.save()
+    except:
+        e = sys.exc_info()[0]
+        return render(request, 'attracker/segment_add.html', {
+            'error_message': "Internal error {0}".format(e),
+        })
     else:
-        date = request.POST['date']
-        start_mile = request.POST['start_mile']
-        debug_info = "You're adding a segment to hiker {0}, date={1}, start={2}".format(hiker.trail_name, date, start_mile) # TODO
         return render(request, 'attracker/hiker.html', {'hiker': hiker, 'debug_info':debug_info})
