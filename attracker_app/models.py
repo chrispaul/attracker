@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 class Hiker(models.Model):
     user = models.OneToOneField(User)
@@ -25,7 +26,7 @@ class Segment(models.Model):
     video_url = models.CharField('Link to video from the section', max_length=300, null=True, blank=True)
     picture_url = models.CharField('Link to pictures', max_length=300, null=True, blank=True)
     additional_miles = models.FloatField('Non-AT miles hiked with the segment', default=0)
-    date = models.DateTimeField('Date segment was hiked')
+    date = models.DateField('Date segment was hiked')
     hiker = models.ForeignKey(Hiker)
 
     @property

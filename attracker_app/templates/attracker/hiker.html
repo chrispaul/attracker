@@ -1,5 +1,7 @@
 <h1>Hiker: {{ hiker.trail_name }} </h1>
 
+{{ debug_info }} <br><br>
+
 <div id="table">
   <table border=1>
     <thead>
@@ -31,5 +33,8 @@
 <br>
 Segments: {{ hiker.number_segments }}
 <br>
-<br>
 <a href="{% url 'segment_add' hiker.id %}">Add Segment</a>
+
+<br>
+<br>
+<a href="{% url 'index' %}">Home to all Hikers</a>

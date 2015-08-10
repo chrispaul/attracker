@@ -1,0 +1,29 @@
+<h1>Add a Segment for Hiker {{ hiker.trail_name }} </h1>
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% else %}
+    <form action="{% url 'segment_add' hiker.id %}" method="post">
+        {% csrf_token %}
+        <label for="date">Date hiked (yyyy-mm-dd): </label>
+        <input id="date" type="date" name="date">
+        <br>
+
+        <label for="start_mile">Start mile: </label>
+        <input id="start_mile" name="start_mile" type="number">
+        <br>
+        <br>
+
+        <input type="submit" value="OK">
+    </form>
+{% endif %}
+
+<!--
+              <td>{{ segment.date }}</td>
+              <td>{{ segment.start_mile }}</td>
+              <td>{{ segment.end_mile }}</td>
+              <td>{{ segment.description }}</td>
+              <td>{{ segment.video_url }}</td>
+              <td>{{ segment.picture_url }}</td>
+              <td>{{ segment.additional_miles }}</td>
+-->
