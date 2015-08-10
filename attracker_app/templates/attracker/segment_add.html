@@ -34,6 +34,9 @@
         <br>
 
         <br>
-        <input type="submit" value="OK">
+        <input type="submit" value="Create Segment">
     </form>
+
 {% endif %}
+<br><br>
+<a href="{% url 'hiker' hiker.id %}">Return to {{ hiker.trail_name }} without adding segment</a>

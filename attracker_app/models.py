@@ -31,7 +31,7 @@ class Segment(models.Model):
 
     @property
     def distance(self):
-        return self.end_mile - self.start_mile
+        return round(self.end_mile - self.start_mile,1)
 
     def __str__(self):
         return "Start @ mile {0} for {1:.1f} miles".format(self.start_mile, self.distance)
