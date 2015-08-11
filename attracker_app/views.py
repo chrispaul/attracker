@@ -27,7 +27,7 @@ def segment_add_get(request, hiker_id):
     try:
         hiker = get_object_or_404(Hiker, pk=hiker_id)
     except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
+        # Redisplay the segment add form.
         return render(request, 'attracker/segment_add.html', {
             'error_message': "No such hiker with ID {0}".format(hiker_id),
         })
@@ -38,33 +38,31 @@ def segment_add_post(request, hiker_id):
     try:
         hiker = get_object_or_404(Hiker, pk=hiker_id)
     except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
+        # Redisplay the segment add form.
         return render(request, 'attracker/segment_add.html', {
             'error_message': "No such hiker with ID {0}".format(hiker_id),
         })
 
-    date = request.POST['date']
-    start_mile = request.POST['start_mile']
-    debug_info = "You're adding a segment to hiker {0}, date={1}, start={2}".format(hiker.trail_name, date, start_mile) # TODO
     try:
         s = Segment(
                 hiker = hiker, 
                 date = request.POST['date'],
-                start_mile = request.POST['start_mile'], 
-                end_mile = request.POST['end_mile'], 
+                start_mile = request.POST['start_mile'] or 0.0, 
+                end_mile = request.POST['end_mile'] or 0.0, 
                 description = request.POST['description'], 
                 video_url = request.POST['video_url'], 
                 picture_url = request.POST['picture_url'], 
-                additional_miles = request.POST['additional_miles']
+                additional_miles = request.POST['additional_miles'] or 0.0 #TODO: what is the idiomatic way to make sure value is not ''?
                 )
         s.save()
     except:
+        import sys
         e = sys.exc_info()[0]
         return render(request, 'attracker/segment_add.html', {
             'error_message': "Internal error {0}".format(e),
         })
     else:
-        return render(request, 'attracker/hiker.html', {'hiker': hiker, 'debug_info':debug_info})
+        return render(request, 'attracker/hiker.html', {'hiker': hiker})
 
 
 def segment_delete(request, hiker_id, segment_id):
@@ -73,20 +71,62 @@ def segment_delete(request, hiker_id, segment_id):
         hiker = get_object_or_404(Hiker, pk=hiker_id)
         segment = get_object_or_404(Segment, pk=segment_id)
         if (hiker.id != segment.hiker.id):
-            # Redisplay the question voting form.
-            return render(request, 'attracker/hiker.html', {
-                'hiker': hiker,
-                'error_message': "Internal error:{0}:{1}:{2}.{3}".format(hiker_id.__class__, segment.hiker.id.__class__, segment_id,(hiker_id != segment.hiker.id))
+            # Redisplay the hiker form.
+            return render(request, 'attracker/index.html', {
+                'error_message': "Internal error:{0}:{1}:{2}".format(hiker_id, segment.hiker.id, segment_id)
             })
         start_mile = segment.start_mile
         segment.delete()
     except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
-        return render(request, 'attracker/segment_add.html', {
+        # Redisplay the hikers form.
+        return render(request, 'attracker/index.html', {
             'error_message': "No such hiker/segment with ID {0}/{1}".format(hiker_id, segment_id),
         })
     return render(request, 'attracker/hiker.html', {
         'hiker': hiker, 
         'error_message': 'Segment starting at mile {0} deleted'.format(start_mile)
     })
+
+
+def segment_edit(request, hiker_id, segment_id):
+    try:
+        hiker = get_object_or_404(Hiker, pk=hiker_id)
+        segment = get_object_or_404(Segment, pk=segment_id)
+    except (KeyError, Choice.DoesNotExist):
+        # Redisplay the hikers form.
+        return render(request, 'attracker/index.html', {
+            'error_message': "Internal error: No such hiker/segment with ID {0}/{1}".format(hiker_id, segment_id),
+        })
+    if request.method == 'POST':
+        return segment_edit_post(request, hiker, segment)
+    elif request.method == 'GET':
+        return segment_edit_get(request, hiker, segment)
+    else:
+        return render(request, 'attracker/index.html', {
+            'error_message': "Internal error: Invalid method {0}".format(request.method),
+        })
+
+def segment_edit_get(request, hiker, segment):
+    return render(request, 'attracker/segment_edit.html', {'hiker': hiker, 'segment': segment})
+
+def segment_edit_post(request, hiker, segment):
+    #try:
+    segment.date = request.POST['date']
+    segment.start_mile = float(request.POST['start_mile'])
+    segment.end_mile = float(request.POST['end_mile'])
+    segment.description = request.POST['description']
+    segment.video_url = request.POST['video_url']
+    segment.picture_url = request.POST['picture_url']
+    segment.additional_miles = float(request.POST['additional_miles'])
+    segment.save()
+    '''except:
+        import sys
+        e = sys.exc_info()[0]
+        return render(request, 'attracker/index.html', {
+            'error_message': "Internal error {0}".format(e),
+        })
+    else:
+    '''
+    return render(request, 'attracker/hiker.html', {'hiker': hiker})
+
 

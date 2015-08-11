@@ -1,0 +1,43 @@
+<h1>Edit a Segment for Hiker {{ hiker.trail_name }} </h1>
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% else %}
+    <form action="{% url 'segment_edit' hiker.id segment.id %}" method="post">
+        {% csrf_token %}
+        <input id="date" type="date" name="date" value="{{ segment.date|date }}">
+        <label for="date">Date hiked </label>
+        <br>
+
+        <input id="start_mile" name="start_mile" type="number" step=any value={{ segment.start_mile }}>
+        <label for="start_mile">Start mile </label>
+        <br>
+
+        <input id="end_mile" name="end_mile" type="number" step=any value={{ segment.end_mile }}>
+        <label for="end_mile">End mile </label>
+        <br>
+
+        <input id="description" name="description" type="text" value="{{ segment.description }}">
+        <label for="description">Description </label>
+        <br>
+
+        <input id="video_url" name="video_url" type="text" value={{ segment.video_url }}>
+        <label for="video_url">Video URL </label>
+        <br>
+
+        <input id="picture_url" name="picture_url" type="text" value={{ segment.picture_url }}>
+        <label for="picture_url">Picture URL </label>
+        <br>
+
+        <input id="additional_miles" name="additional_miles" type="number" step=any value={{ segment.additional_miles }}>
+        <label for="additional_miles">Additional miles </label>
+        <br>
+
+        <br>
+        <input type="submit" value="Update Segment">
+    </form>
+
+{% endif %}
+<br><br>
+<a href="{% url 'hiker' hiker.id %}">Return to {{ hiker.trail_name }} without changing segment</a>
+

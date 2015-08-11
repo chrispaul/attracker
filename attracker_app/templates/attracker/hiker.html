@@ -17,6 +17,7 @@
            <th>Pictures</th>
            <th>Additional miles</th>
            <th>Delete segment</th>
+           <th>Edit segment</th>
         </tr>
     </thead>
     <tbody>
@@ -31,13 +32,15 @@
               <td>{{ segment.picture_url }}</td>
               <td>{{ segment.additional_miles }}</td>
               <td><a href="{% url 'segment_delete' hiker.id segment.id %}">Delete Segment</a></td>
+              <td><a href="{% url 'segment_edit' hiker.id segment.id %}">Edit Segment</a></td>
           </tr>
         {% endfor %}
     </tbody>
   </table>
 </div>
 <br>
-Segments: {{ hiker.number_segments }}
+Number of Segments: {{ hiker.number_segments }}
+<br>
 <br>
 <a href="{% url 'segment_add' hiker.id %}">Add Segment</a>
 

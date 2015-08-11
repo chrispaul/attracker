@@ -25,7 +25,7 @@ class Segment(models.Model):
     description = models.CharField('Comments on the section hiked', max_length=2000, null=True, blank=True)
     video_url = models.CharField('Link to video from the section', max_length=300, null=True, blank=True)
     picture_url = models.CharField('Link to pictures', max_length=300, null=True, blank=True)
-    additional_miles = models.FloatField('Non-AT miles hiked with the segment', default=0)
+    additional_miles = models.FloatField('Non-AT miles hiked with the segment', blank=True, default=0)
     date = models.DateField('Date segment was hiked')
     hiker = models.ForeignKey(Hiker)
 

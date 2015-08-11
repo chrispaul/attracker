@@ -1,10 +1,14 @@
 <h1>Hikers</h1>
-{% if hikers %}
-    <ul>
-    {% for hiker in hikers %}
-      <li><a href="{% url 'hiker' hiker.id %}">{{ hiker.trail_name }}</a></li>
-    {% endfor %}
-    </ul>
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
 {% else %}
-    <p>No hikers are available.</p>
+    {% if hikers %}
+        <ul>
+        {% for hiker in hikers %}
+          <li><a href="{% url 'hiker' hiker.id %}">{{ hiker.trail_name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hikers are available.</p>
+    {% endif %}
 {% endif %}
