@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 import datetime
 from django.db.models import Max
@@ -10,20 +11,27 @@ class Hiker(models.Model):
     def num_segments(self):
         return self.segment_set.count()
     num_segments.short_description = 'Number of segments hiked'
-
     number_segments = property(num_segments)
 
     def last_segment_date(self):
         return self.segment_set.aggregate(Max('date'))['date__max']
     last_segment_date.short_description = 'Date of the last segment hiked'
-
     last_segment_date = property(last_segment_date)
 
     def last_mile(self):
         return self.segment_set.aggregate(Max('end_mile'))['end_mile__max']
     last_mile.short_description = 'Maximum mile hiked'
-
     last_mile = property(last_mile)
+
+    def miles_hiked(self):
+        return sum([s.distance for s in self.segment_set.all()])
+    miles_hiked.short_description = 'Total miles hiked'
+    miles_hiked = property(miles_hiked)
+
+    def miles_to_go(self):
+        return round(settings.AT_TRAIL_MILES - sum([s.distance for s in self.segment_set.all()]), 1)
+    miles_to_go.short_description = 'Total miles remaining on AT'
+    miles_to_go = property(miles_to_go)
 
 
     @property
@@ -51,7 +59,7 @@ class Segment(models.Model):
         return "Start @ mile {0} for {1:.1f} miles".format(self.start_mile, self.distance)
 
 class AppalachianTrail(models.Model):
-    miles = models.FloatField('Total number of miles in AT', default=2184.2)
+    miles = models.FloatField('Total number of miles in AT', default=settings.AT_TRAIL_MILES)
 
     def __str__(self):
         return str(self.miles)

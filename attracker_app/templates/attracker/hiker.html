@@ -4,6 +4,10 @@
     <p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
+<style>
+    .num { text-align: right; }
+</style>
+
 <div id="table">
   <table border=1>
     <thead>
@@ -24,13 +28,13 @@
         {% for segment in segments %}
           <tr>
               <td>{{ segment.date }}</td>
-              <td>{{ segment.start_mile }}</td>
-              <td>{{ segment.end_mile }}</td>
-              <td>{{ segment.distance }}</td>
+              <td class=num>{{ segment.start_mile }}</td>
+              <td class=num>{{ segment.end_mile }}</td>
+              <td class=num>{{ segment.distance }}</td>
               <td>{{ segment.description }}</td>
               <td>{{ segment.video_url }}</td>
               <td>{{ segment.picture_url }}</td>
-              <td>{{ segment.additional_miles }}</td>
+              <td class=num>{{ segment.additional_miles }}</td>
               <td><a href="{% url 'segment_delete' hiker.id segment.id %}">Delete Segment</a></td>
               <td><a href="{% url 'segment_edit' hiker.id segment.id %}">Edit Segment</a></td>
           </tr>
@@ -38,6 +42,10 @@
     </tbody>
   </table>
 </div>
+<br>
+Miles hiked: {{ hiker.miles_hiked }}
+<br>
+Miles remaining: {{ hiker.miles_to_go }}
 <br>
 Number of Segments: {{ hiker.number_segments }}
 <br>

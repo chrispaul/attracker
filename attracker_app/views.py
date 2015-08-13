@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import Http404
+from django.http import HttpResponseRedirect, Http404
+from django.core.urlresolvers import reverse
 from datetime import date, timedelta
 
 from .models import AppalachianTrail, Segment, Hiker
@@ -68,8 +69,7 @@ def segment_add_post(request, hiker_id):
             'error_message': "Internal error {0}".format(e),
         })
     else:
-        return render(request, 'attracker/hiker.html', {'hiker': hiker})
-
+        return HttpResponseRedirect(reverse('hiker', args=(hiker.id,)))
 
 def segment_delete(request, hiker_id, segment_id):
     start_mile = 0
@@ -81,17 +81,13 @@ def segment_delete(request, hiker_id, segment_id):
             return render(request, 'attracker/index.html', {
                 'error_message': "Internal error:{0}:{1}:{2}".format(hiker_id, segment.hiker.id, segment_id)
             })
-        start_mile = segment.start_mile
         segment.delete()
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the hikers form.
         return render(request, 'attracker/index.html', {
             'error_message': "No such hiker/segment with ID {0}/{1}".format(hiker_id, segment_id),
         })
-    return render(request, 'attracker/hiker.html', {
-        'hiker': hiker, 
-        'error_message': 'Segment starting at mile {0} deleted'.format(start_mile)
-    })
+    return HttpResponseRedirect(reverse('hiker', args=(hiker.id,)))
 
 
 def segment_edit(request, hiker_id, segment_id):
