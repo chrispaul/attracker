@@ -5,15 +5,15 @@
 {% else %}
     <form action="{% url 'segment_add' hiker.id %}" method="post">
         {% csrf_token %}
-        <input id="date" type="date" name="date">
+        <input id="date" type="date" name="date" value="{{ next_date|date }}">
         <label for="date">Date hiked </label>
         <br>
 
-        <input id="start_mile" name="start_mile" type="number" step=any>
+        <input id="start_mile" name="start_mile" type="number" step=any value={{ hiker.last_mile }}>
         <label for="start_mile">Start mile </label>
         <br>
 
-        <input id="end_mile" name="end_mile" type="number" step=any>
+        <input id="end_mile" name="end_mile" type="number" step=any value={{ hiker.last_mile }}>
         <label for="end_mile">End mile </label>
         <br>
 

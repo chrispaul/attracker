@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import Http404
+from datetime import date, timedelta
 
 from .models import AppalachianTrail, Segment, Hiker
 
@@ -11,7 +12,8 @@ def index(request):
 
 def hiker(request, hiker_id):
     hiker = get_object_or_404(Hiker, pk=hiker_id)
-    return render(request, 'attracker/hiker.html', {'hiker': hiker})
+    segments = hiker.segment_set.all().order_by('start_mile')
+    return render(request, 'attracker/hiker.html', {'hiker': hiker, 'segments': segments})
 
 def segment_add(request, hiker_id):
     if request.method == 'POST':
@@ -32,7 +34,11 @@ def segment_add_get(request, hiker_id):
             'error_message': "No such hiker with ID {0}".format(hiker_id),
         })
     else:
-        return render(request, 'attracker/segment_add.html', {'hiker': hiker})
+        next_date = hiker.last_segment_date+timedelta(days=1)
+        return render(request, 'attracker/segment_add.html', {
+            'hiker': hiker,
+            'next_date': next_date
+        })
 
 def segment_add_post(request, hiker_id):
     try:

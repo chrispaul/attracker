@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
+from django.db.models import Max
 
 class Hiker(models.Model):
     user = models.OneToOneField(User)
@@ -11,6 +12,19 @@ class Hiker(models.Model):
     num_segments.short_description = 'Number of segments hiked'
 
     number_segments = property(num_segments)
+
+    def last_segment_date(self):
+        return self.segment_set.aggregate(Max('date'))['date__max']
+    last_segment_date.short_description = 'Date of the last segment hiked'
+
+    last_segment_date = property(last_segment_date)
+
+    def last_mile(self):
+        return self.segment_set.aggregate(Max('end_mile'))['end_mile__max']
+    last_mile.short_description = 'Maximum mile hiked'
+
+    last_mile = property(last_mile)
+
 
     @property
     def full_name(self):

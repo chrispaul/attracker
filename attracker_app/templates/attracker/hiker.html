@@ -21,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        {%for segment in hiker.segment_set.all %}
+        {% for segment in segments %}
           <tr>
               <td>{{ segment.date }}</td>
               <td>{{ segment.start_mile }}</td>
