@@ -5,7 +5,7 @@
 {% else %}
     <form action="{% url 'segment_edit' hiker.id segment.id %}" method="post">
         {% csrf_token %}
-        <input id="date" type="date" name="date" value="{{ segment.date }}">
+        <input id="date" type="date" name="date" value="{{ segment.date|date }}">
         <label for="date">Date hiked </label>
         <br>
 

@@ -129,6 +129,6 @@ def segment_edit_post(request, hiker, segment):
         })
     else:
     '''
-    return render(request, 'attracker/hiker.html', {'hiker': hiker})
+    return HttpResponseRedirect(reverse('hiker', args=(hiker.id,)))
 
 
