@@ -8,6 +8,26 @@
     .num { text-align: right; }
 </style>
 
+<div">
+  <table>
+    <tbody>
+          <tr>
+              <td class=num>{{ hiker.miles_hiked }}</td>
+              <td>miles hiked</td>
+          </tr>
+          <tr>
+              <td class=num>{{ hiker.percent_hiked }}%</td>
+              <td> hiked</td>
+          </tr>
+          <tr>
+              <td class=num>{{ hiker.miles_to_go }}</td>
+              <td>miles remaining</td>
+          </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+
 <div id="table">
   <table border=1>
     <thead>
@@ -42,10 +62,6 @@
     </tbody>
   </table>
 </div>
-<br>
-Miles hiked: {{ hiker.miles_hiked }}
-<br>
-Miles remaining: {{ hiker.miles_to_go }}
 <br>
 Number of Segments: {{ hiker.number_segments }}
 <br>

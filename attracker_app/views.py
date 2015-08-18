@@ -27,29 +27,15 @@ def segment_add(request, hiker_id):
         })
 
 def segment_add_get(request, hiker_id):
-    try:
-        hiker = get_object_or_404(Hiker, pk=hiker_id)
-    except (KeyError, Choice.DoesNotExist):
-        # Redisplay the segment add form.
-        return render(request, 'attracker/segment_add.html', {
-            'error_message': "No such hiker with ID {0}".format(hiker_id),
-        })
-    else:
-        next_date = hiker.last_segment_date+timedelta(days=1)
-        return render(request, 'attracker/segment_add.html', {
-            'hiker': hiker,
-            'next_date': next_date
-        })
+    hiker = get_object_or_404(Hiker, pk=hiker_id)
+    next_date = hiker.last_segment_date+timedelta(days=1)
+    return render(request, 'attracker/segment_add.html', {
+        'hiker': hiker,
+        'next_date': next_date
+    })
 
 def segment_add_post(request, hiker_id):
-    try:
-        hiker = get_object_or_404(Hiker, pk=hiker_id)
-    except (KeyError, Choice.DoesNotExist):
-        # Redisplay the segment add form.
-        return render(request, 'attracker/segment_add.html', {
-            'error_message': "No such hiker with ID {0}".format(hiker_id),
-        })
-
+    hiker = get_object_or_404(Hiker, pk=hiker_id)
     try:
         s = Segment(
                 hiker = hiker, 
@@ -73,32 +59,26 @@ def segment_add_post(request, hiker_id):
 
 def segment_delete(request, hiker_id, segment_id):
     start_mile = 0
+    hiker = get_object_or_404(Hiker, pk=hiker_id)
+    segment = get_object_or_404(Segment, pk=segment_id)
     try:
-        hiker = get_object_or_404(Hiker, pk=hiker_id)
-        segment = get_object_or_404(Segment, pk=segment_id)
         if (hiker.id != segment.hiker.id):
             # Redisplay the hiker form.
             return render(request, 'attracker/index.html', {
-                'error_message': "Internal error:{0}:{1}:{2}".format(hiker_id, segment.hiker.id, segment_id)
+                'error_message': "Internal delete error:{0}:{1}:{2}".format(hiker_id, segment.hiker.id, segment_id)
             })
         segment.delete()
-    except (KeyError, Choice.DoesNotExist):
+    except:
         # Redisplay the hikers form.
         return render(request, 'attracker/index.html', {
-            'error_message': "No such hiker/segment with ID {0}/{1}".format(hiker_id, segment_id),
+            "Internal delete error: {0}/{1}".format(hiker_id, segment_id),
         })
     return HttpResponseRedirect(reverse('hiker', args=(hiker.id,)))
 
 
 def segment_edit(request, hiker_id, segment_id):
-    try:
-        hiker = get_object_or_404(Hiker, pk=hiker_id)
-        segment = get_object_or_404(Segment, pk=segment_id)
-    except (KeyError, Choice.DoesNotExist):
-        # Redisplay the hikers form.
-        return render(request, 'attracker/index.html', {
-            'error_message': "Internal error: No such hiker/segment with ID {0}/{1}".format(hiker_id, segment_id),
-        })
+    hiker = get_object_or_404(Hiker, pk=hiker_id)
+    segment = get_object_or_404(Segment, pk=segment_id)
     if request.method == 'POST':
         return segment_edit_post(request, hiker, segment)
     elif request.method == 'GET':

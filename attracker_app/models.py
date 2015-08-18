@@ -24,9 +24,14 @@ class Hiker(models.Model):
     last_mile = property(last_mile)
 
     def miles_hiked(self):
-        return sum([s.distance for s in self.segment_set.all()])
+        return round(sum([s.distance for s in self.segment_set.all()]),1)
     miles_hiked.short_description = 'Total miles hiked'
     miles_hiked = property(miles_hiked)
+
+    def percent_hiked(self):
+        return round(100.0*self.miles_hiked/settings.AT_TRAIL_MILES,1)
+    percent_hiked.short_description = 'Total miles hiked'
+    percent_hiked = property(percent_hiked)
 
     def miles_to_go(self):
         return round(settings.AT_TRAIL_MILES - sum([s.distance for s in self.segment_set.all()]), 1)
