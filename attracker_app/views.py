@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 from datetime import date, timedelta
+import os
 
 from .models import AppalachianTrail, Segment, Hiker
 
@@ -14,7 +15,8 @@ def index(request):
 def hiker(request, hiker_id):
     hiker = get_object_or_404(Hiker, pk=hiker_id)
     segments = hiker.segment_set.all().order_by('start_mile')
-    return render(request, 'attracker/hiker.html', {'hiker': hiker, 'segments': segments})
+    google_maps_browser_key = os.environ['GOOG_MAP_API_KEY']
+    return render(request, 'attracker/hiker.html', {'hiker': hiker, 'segments': segments, 'google_maps_browser_key': google_maps_browser_key })
 
 def segment_add(request, hiker_id):
     if request.method == 'POST':

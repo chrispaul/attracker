@@ -1,73 +1,100 @@
-<h1>Hiker: {{ hiker.trail_name }} </h1>
+<!DOCTYPE html>
+<head>
+  <style type="text/css">
+    html, body { height: 100%; margin: 0; padding: 0; }
+    #map { height: 60%; }
+  </style>
+</head>
+<body>
+    <h1>Hiker: {{ hiker.trail_name }} </h1>
 
-{% if error_message %}
-    <p><strong>{{ error_message }}</strong></p>
-{% endif %}
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
 
-<style>
-    .num { text-align: right; }
-</style>
+    <style>
+        .num { text-align: right; }
+    </style>
 
-<div">
-  <table>
-    <tbody>
-          <tr>
-              <td class=num>{{ hiker.miles_hiked }}</td>
-              <td>miles hiked</td>
-          </tr>
-          <tr>
-              <td class=num>{{ hiker.percent_hiked }}%</td>
-              <td> hiked</td>
-          </tr>
-          <tr>
-              <td class=num>{{ hiker.miles_to_go }}</td>
-              <td>miles remaining</td>
-          </tr>
-    </tbody>
-  </table>
-</div>
-<br>
+    <div>
+      <table>
+        <tbody>
+              <tr>
+                  <td class=num>{{ hiker.miles_hiked }}</td>
+                  <td>miles hiked</td>
+              </tr>
+              <tr>
+                  <td class=num>{{ hiker.percent_hiked }}%</td>
+                  <td> hiked</td>
+              </tr>
+              <tr>
+                  <td class=num>{{ hiker.miles_to_go }}</td>
+                  <td>miles remaining</td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+    <br>
 
-<div id="table">
-  <table border=1>
-    <thead>
-        <tr>
-           <th>Date</th>
-           <th>Start mile</th>
-           <th>End mile</th>
-           <th>Segment Distance</th>
-           <th>Description</th>
-           <th>Video</th>
-           <th>Pictures</th>
-           <th>Additional miles</th>
-           <th>Delete segment</th>
-           <th>Edit segment</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for segment in segments %}
-          <tr>
-              <td>{{ segment.date }}</td>
-              <td class=num>{{ segment.start_mile }}</td>
-              <td class=num>{{ segment.end_mile }}</td>
-              <td class=num>{{ segment.distance }}</td>
-              <td>{{ segment.description }}</td>
-              <td>{{ segment.video_url }}</td>
-              <td>{{ segment.picture_url }}</td>
-              <td class=num>{{ segment.additional_miles }}</td>
-              <td><a href="{% url 'segment_delete' hiker.id segment.id %}">Delete Segment</a></td>
-              <td><a href="{% url 'segment_edit' hiker.id segment.id %}">Edit Segment</a></td>
-          </tr>
-        {% endfor %}
-    </tbody>
-  </table>
-</div>
-<br>
-Number of Segments: {{ hiker.number_segments }}
-<br>
-<br>
-<a href="{% url 'segment_add' hiker.id %}">Add Segment</a>
+    <div id="table">
+      <table border=1>
+        <thead>
+            <tr>
+               <th>Date</th>
+               <th>Start mile</th>
+               <th>End mile</th>
+               <th>Segment Distance</th>
+               <th>Description</th>
+               <th>Video</th>
+               <th>Pictures</th>
+               <th>Additional miles</th>
+               <th>Delete segment</th>
+               <th>Edit segment</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for segment in segments %}
+              <tr>
+                  <td>{{ segment.date }}</td>
+                  <td class=num>{{ segment.start_mile }}</td>
+                  <td class=num>{{ segment.end_mile }}</td>
+                  <td class=num>{{ segment.distance }}</td>
+                  <td>{{ segment.description }}</td>
+                  <td>{{ segment.video_url }}</td>
+                  <td>{{ segment.picture_url }}</td>
+                  <td class=num>{{ segment.additional_miles }}</td>
+                  <td><a href="{% url 'segment_delete' hiker.id segment.id %}">Delete Segment</a></td>
+                  <td><a href="{% url 'segment_edit' hiker.id segment.id %}">Edit Segment</a></td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <br>
+    Number of Segments: {{ hiker.number_segments }}
+    <br>
+    <br>
+    <a href="{% url 'segment_add' hiker.id %}">Add Segment</a>
 
-<br>
-<br>
-<a href="{% url 'index' %}">Home to all Hikers</a>
+    <br>
+    <br>
+    <a href="{% url 'index' %}">Home to all Hikers</a>
+
+    <br>
+    <br>
+
+    Map:
+    <div id="map"></div>
+    <script type="text/javascript">
+        var map;
+        function initMap() {
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 44.40016, lng: -71.11198},
+            zoom: 15
+          });
+        }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key={{google_maps_browser_key}}&callback=initMap">
+    </script>
+</body>
