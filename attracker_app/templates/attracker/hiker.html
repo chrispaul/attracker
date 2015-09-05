@@ -93,7 +93,30 @@
                 zoom: 15
             });
 
+            // Draw a portion of the trail.
             var trailCoordinates = [
+/*
+                // Section north of White Mtn Hostel: Anand Thakker's merged data. https://github.com/anandthakker/apptrail
+                {lat: 44.40677042040967, lng: -71.13888205137543},
+                {lat: 44.40507149281587, lng: -71.13909265682395},
+                {lat: 44.40512502999731, lng: -71.13899271558351},
+                {lat: 44.403236876613754, lng: -71.12697129075175},
+                {lat: 44.403240445236854, lng: -71.12685707273563},
+                {lat: 44.404082738783764, lng: -71.12018399170606},
+                {lat: 44.404082738782705, lng: -71.12018399180957},
+                {lat: 44.40647764059802, lng: -71.11679872116592},
+                {lat: 44.40640268720595, lng: -71.11666308802053},
+                {lat: 44.40016162702152, lng: -71.11198885103762},
+                {lat: 44.40016162701562, lng: -71.11198885114203},
+                {lat: 44.40082091867162, lng: -71.1093669308485},
+                {lat: 44.40082078639738, lng: -71.1093671001694},
+                {lat: 44.3981221642017, lng: -71.11035262302174},
+                {lat: 44.3979901042971, lng: -71.1102848073438},
+*/
+
+/*
+                // Section nort of White Mtn hostel: ATC centerline data
+*/
                 {lat: 44.40016162702151, lng: -71.11198885103762},
                 {lat: 44.40016017265461, lng: -71.1119944870284},
                 {lat: 44.40026011006432, lng: -71.11208371888176},
@@ -145,8 +168,15 @@
                 strokeOpacity: 1.0,
                 strokeWeight: 4
             });
-
         trail.setMap(map);
+
+        // Draw a point on the trail for the start of a day
+        var latLng = {lat: 44.40016162702151, lng: -71.11198885103762};
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            title: '9/8/2015 - 15 miles - Started at White Mountain Lodge & Hostel'
+        });
     }
 </script>
 <script asynch defer
