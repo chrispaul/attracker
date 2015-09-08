@@ -31,16 +31,15 @@
         function initMap() {
 
             //Hack midpoint
-            var latMid = 44.40039930901872;
-            var lngMid = -71.1122943069697;
+            var mid = JSON.parse('{{ mid }}');
             map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: latMid, lng: lngMid},
+                center: mid,
                 zoom: 5,
                 zoomControl: true,
                 panControl: false
             });
 
-            var polyline = JSON.parse('{{ polyline }}')
+            var polyline = JSON.parse('{{ polyline }}');
             var trail = new google.maps.Polyline({
                 path: polyline.coordinates,
                     geodesic: true,

@@ -31,7 +31,14 @@ def hiker(request, hiker_id):
         {'lat': 44.40158784946722, 'lng': -71.11317234646766},
         {'lat': 44.40224814975794, 'lng': -71.11366847458358},
     ]}
-    return render(request, 'attracker/hiker.html', {'hiker': hiker, 'segments': segments, 'google_maps_browser_key': google_maps_browser_key, 'polyline': mark_safe(escapejs(json.dumps(polyline))) })
+    mid =  {'lat': 44.40039930901872, 'lng': -71.1122943069697}
+    return render(request, 'attracker/hiker.html', {
+        'hiker': hiker, 
+        'segments': segments, 
+        'google_maps_browser_key': google_maps_browser_key, 
+        'polyline': mark_safe(escapejs(json.dumps(polyline))),
+        'mid': mark_safe(escapejs(json.dumps(mid))) 
+    })
 
 def segment_add(request, hiker_id):
     if request.method == 'POST':
