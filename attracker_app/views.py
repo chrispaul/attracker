@@ -6,6 +6,7 @@ from django.utils.safestring import mark_safe
 from django.utils.html import escapejs
 import json
 import os
+from . import at_coordinates
 
 from .models import AppalachianTrail, Segment, Hiker
 
@@ -19,22 +20,20 @@ def hiker(request, hiker_id):
     hiker = get_object_or_404(Hiker, pk=hiker_id)
     segments = hiker.segment_set.all().order_by('start_mile')
     google_maps_browser_key = os.environ['GOOG_MAP_API_KEY']
-    #CP TODO rm: White Mtn Hostel & North
+    mid = at_coordinates.MID
     polylines = [
-        { 'color': 'blue', 'coordinates': [
+        { 'color': 'blue', 'coordinates': at_coordinates.COORDINATES,},
+        { 'color': 'yellow', 'coordinates': [
             {'lat': 44.40016162702151, 'lng': -71.11198885103762},
             {'lat': 44.40016017265461, 'lng': -71.1119944870284},
             {'lat': 44.40026011006432, 'lng': -71.11208371888176},
             {'lat': 44.40037432416757, 'lng': -71.11216938128825},
             {'lat': 44.4004314312886, 'lng': -71.11222648973927},
-        ]},
-        { 'color': 'yellow', 'coordinates': [
             {'lat': 44.40039930901872, 'lng': -71.1122943069697},
             {'lat': 44.40092754917721, 'lng': -71.11267621835199},
             {'lat': 44.40158784946722, 'lng': -71.11317234646766},
             {'lat': 44.40224814975794, 'lng': -71.11366847458358},
     ]}]
-    mid =  {'lat': 44.40039930901872, 'lng': -71.1122943069697}
     return render(request, 'attracker/hiker.html', {
         'hiker': hiker, 
         'segments': segments, 

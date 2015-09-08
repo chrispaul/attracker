@@ -33,7 +33,7 @@
             var mid = JSON.parse('{{ mid }}');
             map = new google.maps.Map(document.getElementById('map'), {
                 center: mid,
-                zoom: 16, //CP TODO: 5,
+                zoom: 5,
                 zoomControl: true,
                 panControl: false
             });
@@ -51,7 +51,7 @@
             });
 
             // Draw a point on the trail for the start of a day
-            //TODO CP var latLng = {lat: 44.40016162702151, lng: -71.11198885103762};
+            //TODO CP pass in points from Django view
             var latLng = {lat: 44.40016162702151, lng: -71.11198885103762};
             var marker = new google.maps.Marker({
                 position: latLng,
