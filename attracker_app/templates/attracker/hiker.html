@@ -57,10 +57,11 @@
                 zoom: 5
             });
 
+            var polyline = JSON.parse('{{ polyline }}')
             var trail = new google.maps.Polyline({
-                path: trailCoordinates,
+                path: polyline.coordinates,
                     geodesic: true,
-                    strokeColor: '#FF00FF',
+                    strokeColor: polyline.color, //'green', //'blue', //'yellow', //'#FF00FF',
                     strokeOpacity: 1.0,
                     strokeWeight: 4
                 });
