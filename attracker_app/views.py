@@ -17,6 +17,8 @@ def index(request):
     return render(request, 'attracker/index.html', context)
 
 def hiker(request, hiker_id):
+    # To display markers for each polyline in the trail, append ?markers=1 as the querystring.
+    display_markers = int(request.GET.get('markers',0))
     hiker = get_object_or_404(Hiker, pk=hiker_id)
     segments = hiker.segment_set.all().order_by('start_mile')
     google_maps_browser_key = os.environ['GOOG_MAP_API_KEY']
@@ -39,7 +41,8 @@ def hiker(request, hiker_id):
         'segments': segments, 
         'google_maps_browser_key': google_maps_browser_key, 
         'polylines': mark_safe(escapejs(json.dumps(polylines))),
-        'mid': mark_safe(escapejs(json.dumps(mid))) 
+        'mid': mark_safe(escapejs(json.dumps(mid))),
+        'display_markers': display_markers
     })
 
 def segment_add(request, hiker_id):

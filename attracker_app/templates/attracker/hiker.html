@@ -43,11 +43,24 @@
                 var trail = new google.maps.Polyline({
                     path: polyline.coordinates,
                         geodesic: true,
-                        strokeColor: polyline.color, //'green', //'blue', //'yellow', //'#FF00FF',
+                        strokeColor: polyline.color,
                         strokeOpacity: 1.0,
                         strokeWeight: 4
                     });
                 trail.setMap(map);
+
+                //Draw markers for beginning of every segment.
+                var display_markers = JSON.parse('{{ display_markers }}');
+                if (display_markers == 1) {
+                    polyline.coordinates.forEach(function(coordinate) {
+                        var marker = new google.maps.Marker({
+                            position: coordinate,
+                            map: map,
+                            title: coordinate['lat']+' '+coordinate['lng']
+                        });
+
+                    });
+                };
             });
 
             // Draw a point on the trail for the start of a day
