@@ -116,8 +116,8 @@
                   <td>{{ segment.video_url }}</td>
                   <td>{{ segment.picture_url }}</td>
                   <td class=num>{{ segment.additional_miles }}</td>
-                  <td><a href="{% url 'segment_delete' hiker.id segment.id %}">Delete Segment</a></td>
-                  <td><a href="{% url 'segment_edit' hiker.id segment.id %}">Edit Segment</a></td>
+                  <td><a href="{% url 'segment_delete' hiker.id segment.id %}">Delete</a></td>
+                  <td><a href="{% url 'segment_edit' hiker.id segment.id %}">Edit</a></td>
               </tr>
             {% endfor %}
         </tbody>

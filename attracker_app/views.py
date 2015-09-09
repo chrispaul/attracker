@@ -16,6 +16,56 @@ def index(request):
     context = {'hikers': hikers}
     return render(request, 'attracker/index.html', context)
 
+def build_polylines(segments):
+    polylines = []
+
+    # If first segment is after Springer, let's paint starting with yellow, else blue
+    HIKED_COLOR = 'blue'
+    TO_HIKE_COLOR = 'yellow'  # The yellow brick road
+    segment_i = 0
+    # TODO: handle hiker with NO segments hiked: if segments.length... else segment = Segment(start_mile=settings.AT_TRAIL_MILES+1...)
+    segment = segments[segment_i] # Start at southernmost segment hiked
+    polyline = {'color': HIKED_COLOR, 'coordinates': []} # Build 1st polyline
+    if segment.start_mile > 0: # If hiker's first segment
+        polyline['color'] = TO_HIKE_COLOR
+    hiking_in_segment = False
+
+    coordinates = list(reversed(at_coordinates.COORDINATES)) # Start at Springer; TODO reverse original.
+    #TODO import pdb; pdb.set_trace() #TODO CP rm>>>>>>>>>>>>>>>>>>>>>>>>>>
+    for coordinate in coordinates:
+        # If the coordinates line has a mile and it matches the current segment
+        if (coordinate.get('mile') == segment.start_mile):
+            hiking_in_segment = True
+            # if we are transitioning from hiked to unhiked
+            if (polyline['color'] == TO_HIKE_COLOR):
+                if len(polyline['coordinates']):
+                    # Break off the unhiked polyline, and start a new hiked polyline
+                    polylines.append(polyline) # Add the polyline with the unhiked color
+                    polyline = {'color': HIKED_COLOR, 'coordinates': []} # Start a new hiked line
+                else: # Empty polyline: just change color.
+                    polyline['color'] = HIKED_COLOR
+            # TODO Hackzone due to having very few coodinate['mile'] entries: advance segment to last segment if next segment has starts at this segment's end
+            while (segment_i < len(segments)-1) and (segments[segment_i].end_mile == segments[segment_i+1].start_mile):
+                segment_i += 1
+                segment = segments[segment_i]
+        elif (coordinate.get('mile') == segment.end_mile):
+            hiking_in_segment = False
+            if segment_i < len(segments)-1:
+                segment_i += 1 # Advance to next segment
+                segment = segments[segment_i]
+        # We at a point that doesn't correspond to a segment start or end.
+        # If we we are not in a segment and we think we are hiking, transition to TO_HIKE_COLOR
+        elif not hiking_in_segment and polyline['color'] == HIKED_COLOR: 
+            # Break off the hiked polyline, and start a new unhiked polyline
+            polylines.append(polyline) # Add the polyline with the hiked color
+            polyline = {'color': TO_HIKE_COLOR, 'coordinates': []} # Start a new unhiked line
+            hiking_in_segment = False
+        polyline['coordinates'].append(coordinate) # Add the line to the polyline.
+    if len(polyline['coordinates']):
+        # Break off the unhiked polyline, and start a new hiked polyline
+        polylines.append(polyline) # Add the polyline with the unhiked color
+    return polylines
+
 def hiker(request, hiker_id):
     # To display markers for each polyline in the trail, append ?markers=1 as the querystring.
     display_markers = int(request.GET.get('markers',0))
@@ -23,19 +73,8 @@ def hiker(request, hiker_id):
     segments = hiker.segment_set.all().order_by('start_mile')
     google_maps_browser_key = os.environ['GOOG_MAP_API_KEY']
     mid = at_coordinates.MID
-    polylines = [
-        { 'color': 'blue', 'coordinates': at_coordinates.COORDINATES,},
-        { 'color': 'yellow', 'coordinates': [
-            {'lat': 44.40016162702151, 'lng': -71.11198885103762},
-            {'lat': 44.40016017265461, 'lng': -71.1119944870284},
-            {'lat': 44.40026011006432, 'lng': -71.11208371888176},
-            {'lat': 44.40037432416757, 'lng': -71.11216938128825},
-            {'lat': 44.4004314312886, 'lng': -71.11222648973927},
-            {'lat': 44.40039930901872, 'lng': -71.1122943069697},
-            {'lat': 44.40092754917721, 'lng': -71.11267621835199},
-            {'lat': 44.40158784946722, 'lng': -71.11317234646766},
-            {'lat': 44.40224814975794, 'lng': -71.11366847458358},
-    ]}]
+    polylines = build_polylines(segments)
+
     return render(request, 'attracker/hiker.html', {
         'hiker': hiker, 
         'segments': segments, 
