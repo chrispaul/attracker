@@ -73,6 +73,7 @@ def hiker(request, hiker_id):
     segments = hiker.segment_set.all().order_by('start_mile')
     google_maps_browser_key = os.environ['GOOG_MAP_API_KEY']
     mid = at_coordinates.MID
+    # Build the blue & yellow polylines from the segments hiked and the AT coordinates.
     polylines = build_polylines(segments)
 
     return render(request, 'attracker/hiker.html', {
