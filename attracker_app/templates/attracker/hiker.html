@@ -29,6 +29,7 @@
     <div id="map" class="left_margin"></div>
     <script type="text/javascript">
         var map;
+        var feature_markers = [];
         function initMap() {
 
             var mid = JSON.parse('{{ mid }}');
@@ -64,14 +65,19 @@
                 };
             });
 
-            // Draw a point on the trail for the start of a day
-            //TODO CP pass in points from Django view
-            var latLng = {lat: 44.40016162702151, lng: -71.11198885103762};
-            var marker = new google.maps.Marker({
-                position: latLng,
-                map: map,
-                title: '9/8/2015 - 15 miles - Started at White Mountain Lodge & Hostel'
+            //Display features: shelters, peaks...
+            var features = JSON.parse('{{ features }}');
+            features.forEach(function(feature) {
+                var latLng = {lat: feature['lat'], lng: feature['lon']};
+                var title = feature['name'];
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                    title: title
+                });
+                feature_markers.push(marker)
             });
+
         }
     </script>
     <script asynch defer

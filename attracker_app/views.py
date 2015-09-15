@@ -7,6 +7,7 @@ from django.utils.html import escapejs
 import json
 import os
 from . import at_coordinates
+from . import at_features
 
 from .models import AppalachianTrail, Segment, Hiker
 
@@ -82,6 +83,7 @@ def hiker(request, hiker_id):
         'google_maps_browser_key': google_maps_browser_key, 
         'polylines': mark_safe(escapejs(json.dumps(polylines))),
         'mid': mark_safe(escapejs(json.dumps(mid))),
+        'features': mark_safe(escapejs(json.dumps(at_features.FEATURES))), # Shelters & peaks
         'display_markers': display_markers
     })
 
