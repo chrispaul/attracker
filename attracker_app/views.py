@@ -31,9 +31,7 @@ def build_polylines(segments):
         polyline['color'] = TO_HIKE_COLOR
     hiking_in_segment = False
 
-    coordinates = list(reversed(at_coordinates.COORDINATES)) # Start at Springer; TODO reverse original.
-    #TODO import pdb; pdb.set_trace() #TODO CP rm>>>>>>>>>>>>>>>>>>>>>>>>>>
-    for coordinate in coordinates:
+    for coordinate in at_coordinates.COORDINATES:
         # If the coordinates line has a mile and it matches the current segment
         if (coordinate.get('mile') == segment.start_mile):
             hiking_in_segment = True
