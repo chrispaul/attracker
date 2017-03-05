@@ -1,6 +1,6 @@
+from geopy.distance import vincenty
 # Source data for this file comes from atdb.091015051935.ALL.csv from www.sophiaknows.com/atdb/waypoints.php
 # This file is now updated by script and by hand.
-MID = {'lat': 40.484360073883536, 'lng':-76.54972237514338}
 COORDINATES = [
   {'lat': 34.626693161734536, 'lng': -84.19382841822977, 'mile': 0, 'description': 'Springer Mountain'},
   {'lat': 34.62855645479775, 'lng': -84.19447422923058},
@@ -9753,7 +9753,7 @@ COORDINATES = [
   {'lat': 42.26715885793745, 'lng': -73.1825757665079},
   {'lat': 42.270420810777445, 'lng': -73.18821772520178},
   {'lat': 42.270519415050074, 'lng': -73.18826303090034},
-  {'lat': 42.27712162028488, 'lng': -73.18159784424451, 'mile': 1545.5, 'description': 'Goose Pond Rd - 4 miles south of US 20 in MA'},
+  {'lat': 42.27712162028488, 'lng': -73.18159784424451},
   {'lat': 42.27720459878008, 'lng': -73.18157139333522},
   {'lat': 42.27824249732327, 'lng': -73.18426268263961},
   {'lat': 42.278301126944896, 'lng': -73.18430265846575},
@@ -12890,7 +12890,7 @@ COORDINATES = [
   {'lat': 45.03926245733545, 'lng': -70.342629031654},
   {'lat': 45.039306086866894, 'lng': -70.3426464727637},
   {'lat': 45.039637230164004, 'lng': -70.34473195226165},
-  {'lat': 45.03964010202621, 'lng': -70.34471928798517, 'mile': 1993.7, 'description': 'Caribou Valley Rd near Stratton ME'},
+  {'lat': 45.03964010202621, 'lng': -70.34471928798517},
   {'lat': 45.042325174210006, 'lng': -70.35459868931142},
   {'lat': 45.04239613303678, 'lng': -70.35487836263482},
   {'lat': 45.04092094255741, 'lng': -70.36042648705018},
@@ -13649,7 +13649,7 @@ COORDINATES = [
   {'lat': 45.48054289648488, 'lng': -69.28737330679765},
   {'lat': 45.48063559722697, 'lng': -69.28767691615091},
   {'lat': 45.48063559722697, 'lng': -69.28767691615091},
-  {'lat': 45.479484970741886, 'lng': -69.29083978325856, 'mile': 2105.1, 'description': 'KI Rd near Gulf Hagas and Hermitage'},
+  {'lat': 45.479484970741886, 'lng': -69.29083978325856},
   {'lat': 45.479518534693746, 'lng': -69.29081530008162},
   {'lat': 45.47984322812699, 'lng': -69.29837178011934},
   {'lat': 45.47988221129962, 'lng': -69.29865218036012},
@@ -14239,3 +14239,35 @@ COORDINATES = [
   {'lat': 45.898760218859564, 'lng': -68.93168653222568},
   {'lat': 45.898357505740265, 'lng': -68.93676977186965, 'mile': 2189.2, 'description': 'Katahdin, Baxter Peak'},
 ]
+
+
+def closest_point(lat, lng, sobo_mile, description):
+    """Return the index of the closest point and the distance
+    """
+    nobo_mile = round(2189.2 - sobo_mile,1)
+    point = (lat, lng)
+    nearest_point = None
+    nearest_distance = 999999
+    for i, coordinate in enumerate(COORDINATES):
+        at_point = (coordinate['lat'], coordinate['lng'])
+        distance = vincenty(point, at_point).miles
+        if distance < nearest_distance:
+            nearest_distance = distance
+            nearest_point = i
+
+    print("{{'lat': {lat}, 'lng': {lng}, 'mile': {mile}, 'description': '{dsc}'}},".format(
+        distance=round(nearest_distance,1),
+        lat=COORDINATES[nearest_point]['lat'],
+        lng=COORDINATES[nearest_point]['lng'],
+        index=nearest_point,
+        mile=nobo_mile,
+        dsc=description))
+
+def main():
+    closest_point(42.274443, -73.183861, 643.7, "Goose Pond Rd - 4 miles south of US 20 in MA")
+    closest_point(45.039440, -70.344531, 195.5, "Caribou Valley Rd near Stratton ME")
+    closest_point(45.476940, -69.288330, 84.1, "KI Rd near Gulf Hagas and Hermitage")
+
+
+if __name__ == '__main__':
+    main()
