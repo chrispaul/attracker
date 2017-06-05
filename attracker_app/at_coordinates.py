@@ -1,5 +1,9 @@
 # Source data for this file comes from atdb.091015051935.ALL.csv from www.sophiaknows.com/atdb/waypoints.php
 # This file is now updated by script and by hand.
+#
+# Hack:
+# The mile markers are computed by using the distance.py module to find the nearest point on the AT to the lat/lon of a mile post.
+# To use distance.py: add a call to closest_point to spit out the line in this file to replace.
 MID = {'lat': 40.484360073883536, 'lng':-76.54972237514338}
 COORDINATES = [
   {'lat': 34.626693161734536, 'lng': -84.19382841822977, 'mile': 0, 'description': 'Springer Mountain'},
@@ -672,7 +676,7 @@ COORDINATES = [
   {'lat': 35.1507164505849, 'lng': -83.58018108728437},
   {'lat': 35.15075809115283, 'lng': -83.58015729267413},
   {'lat': 35.153976564381765, 'lng': -83.5802796183414},
-  {'lat': 35.153976564381765, 'lng': -83.5802796183414},
+  {'lat': 35.153976564381765, 'lng': -83.5802796183414, 'mile': 109.8, 'description': 'Winding Stair Gap, US64, near Franklin, NC'},
   {'lat': 35.15653423278998, 'lng': -83.57796818853154},
   {'lat': 35.156641308536095, 'lng': -83.57793844526873},
   {'lat': 35.16100167086364, 'lng': -83.5772365042665},
@@ -9523,7 +9527,7 @@ COORDINATES = [
   {'lat': 42.146734682934905, 'lng': -73.35940230438537},
   {'lat': 42.144368270083966, 'lng': -73.35999184697832},
   {'lat': 42.144368270079404, 'lng': -73.35999184697849},
-  {'lat': 42.14390060450596, 'lng': -73.35891603315554},
+  {'lat': 42.14390060450596, 'lng': -73.35891603315554, 'mile': 1521.6, 'description': 'Kellog Rd: Housatonic River Bridge'},
   {'lat': 42.1439006045014, 'lng': -73.35891603315571},
   {'lat': 42.14416562110761, 'lng': -73.35289552071889},
   {'lat': 42.144147463094534, 'lng': -73.35280803026369},
@@ -13642,7 +13646,7 @@ COORDINATES = [
   {'lat': 45.47401620437125, 'lng': -69.29453154794703},
   {'lat': 45.47401314853383, 'lng': -69.2945443680769},
   {'lat': 45.48037880875126, 'lng': -69.28711528595795},
-  {'lat': 45.48037880875126, 'lng': -69.28711528595795},
+  {'lat': 45.48037880875126, 'lng': -69.28711528595795, 'mile': 2104.4, 'description': 'Katahdin Ironwords Rd'},
   {'lat': 45.48051867082696, 'lng': -69.2872278351526},
   {'lat': 45.48051867082696, 'lng': -69.2872278351526},
   {'lat': 45.48054289648488, 'lng': -69.28737330679765},

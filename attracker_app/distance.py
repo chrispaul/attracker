@@ -14267,7 +14267,9 @@ def main():
     closest_point(42.274443, -73.183861, 643.7, "Goose Pond Rd - 4 miles south of US 20 in MA")
     closest_point(45.039440, -70.344531, 195.5, "Caribou Valley Rd near Stratton ME")
     closest_point(45.476940, -69.288330, 84.1, "KI Rd near Gulf Hagas and Hermitage")
-
+    closest_point(42.144,-73.3595, 667.6, "Kellog Rd: Housatonic River Bridge")
+    closest_point(35.154,-83.5807, 109.8, "Winding Stair Gap, US64, near Franklin, NC")
+    closest_point(45.4772,-69.2851, 2104.4, "Katahdin Ironwords Rd")
 
 if __name__ == '__main__':
     main()
