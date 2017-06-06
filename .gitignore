@@ -3,6 +3,7 @@ venv/
 .DS_Store
 .*.swp
 db.sqlite3
+sqllitedb
 
 __pycache__/
 *.py[cod]
@@ -60,3 +61,9 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Environment vbls
+.env
+
+staticfiles
+attrackerenv
