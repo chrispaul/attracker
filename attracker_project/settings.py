@@ -25,7 +25,7 @@ SECRET_KEY = '_k6sactgdq*w4qp1&-^lnjgih8&lie-%y-%kcii*owbs)dl&=d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['whispering-mesa-73799.herokuapp.com','localhost','0.0.0.0','atshit.com']
+ALLOWED_HOSTS = ['whispering-mesa-73799.herokuapp.com','localhost','0.0.0.0','atshit.com','atshit.herokuapp.com']
 
 
 # Application definition
