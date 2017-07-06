@@ -14237,14 +14237,14 @@ COORDINATES = [
   {'lat': 45.90393582095661, 'lng': -68.92576351177232},
   {'lat': 45.89881446119343, 'lng': -68.9314773973601},
   {'lat': 45.898760218859564, 'lng': -68.93168653222568},
-  {'lat': 45.898357505740265, 'lng': -68.93676977186965, 'mile': 2189.2, 'description': 'Katahdin, Baxter Peak'},
+  {'lat': 45.898357505740265, 'lng': -68.93676977186965, 'mile': 2189.1, 'description': 'Katahdin, Baxter Peak'},
 ]
 
 
 def closest_point(lat, lng, sobo_mile, description):
     """Return the index of the closest point and the distance
     """
-    nobo_mile = round(2189.2 - sobo_mile,1)
+    nobo_mile = round(2189.1 - sobo_mile,1)
     point = (lat, lng)
     nearest_point = None
     nearest_distance = 999999
@@ -14265,11 +14265,12 @@ def closest_point(lat, lng, sobo_mile, description):
 
 def main():
     closest_point(42.274443, -73.183861, 643.7, "Goose Pond Rd - 4 miles south of US 20 in MA")
-    closest_point(45.039440, -70.344531, 195.5, "Caribou Valley Rd near Stratton ME")
+    closest_point(45.039440, -70.344531, 196.5, "Caribou Valley Rd near Stratton ME")
     closest_point(45.476940, -69.288330, 84.1, "KI Rd near Gulf Hagas and Hermitage")
     closest_point(42.144,-73.3595, 667.6, "Kellog Rd: Housatonic River Bridge")
     closest_point(35.154,-83.5807, 109.8, "Winding Stair Gap, US64, near Franklin, NC")
     closest_point(45.4772,-69.2851, 2104.4, "Katahdin Ironwords Rd")
+    closest_point(41.9623,-73.374, 696.7, "Housatonic River Rd, Falls village, CT") #1492.4
 
 if __name__ == '__main__':
     main()
