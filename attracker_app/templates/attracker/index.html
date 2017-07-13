@@ -1,7 +1,6 @@
-<head>
-  <title>ATSHiT - Appalachian Trail Section Hiker Tracker</title>
-</head>
-<h1>ATSHiT - Appalachian Trail Section Hiker Tracker</h1> 
+{% extends "site.html" %}
+
+{% block body %}
 <h2>Hikers</h2>
 {% if error_message %}
     <p><strong>{{ error_message }}</strong></p>
@@ -9,10 +8,11 @@
     {% if hikers %}
         <ul>
         {% for hiker in hikers %}
-          <li><a href="{% url 'hiker' hiker.id %}">{{ hiker.trail_name }}</a></li>
+        <li><a href="{% url 'hiker' hiker.id %}">{{ hiker.trail_name }}</a> - {{ hiker.user.first_name }} {{ hiker.user.last_name }} </li>
         {% endfor %}
         </ul>
     {% else %}
         <p>No hikers are available.</p>
     {% endif %}
 {% endif %}
+{% endblock %}
