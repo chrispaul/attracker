@@ -8,7 +8,7 @@
     {% if hikers %}
         <ul>
         {% for hiker in hikers %}
-        <li><a href="{% url 'hiker' hiker.id %}">{{ hiker.trail_name }}</a> - {{ hiker.user.first_name }} {{ hiker.user.last_name }} </li>
+          <li><a href="{% url 'hiker' hiker.id %}">{{ hiker.trail_name }}</a> - {{ hiker.user.first_name }} {{ hiker.user.last_name }} </li>
         {% endfor %}
         </ul>
     {% else %}

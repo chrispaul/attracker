@@ -1,5 +1,6 @@
+{% extends "site.html" %}
 <!DOCTYPE html>
-<head>
+{% block head %}
   <style type="text/css">
     html, body { height: 100%; margin: 0; padding: 0; }
     #map { height: 60%; width: 50% }
@@ -9,9 +10,9 @@
     .left_margin { margin-left: 15px; }
     }
   </style>
-</head>
-<body>
-    <h1>Hiker: {{ hiker.trail_name }} </h1>
+{% endblock %}
+{% block body %}
+    <h2>Hiker: {{ hiker.trail_name }} </h2>
 
     {% if error_message %}
         <p><strong>{{ error_message }}</strong></p>
@@ -151,5 +152,4 @@
         </tbody>
       </table>
     </div>
-    
-</body>
+{% endblock %}
