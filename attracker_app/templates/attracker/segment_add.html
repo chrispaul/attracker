@@ -1,4 +1,7 @@
-<h1>Add a Segment for Hiker {{ hiker.trail_name }} </h1>
+{% extends "site.html" %}
+
+{% block body %}
+<h2>Add a Segment for Hiker {{ hiker.trail_name }} </h2>
 
 {% if error_message %}
     <p><strong>{{ error_message }}</strong></p>
@@ -40,3 +43,4 @@
 {% endif %}
 <br><br>
 <a href="{% url 'hiker' hiker.id %}">Return to {{ hiker.trail_name }} without adding segment</a>
+{% endblock %}
