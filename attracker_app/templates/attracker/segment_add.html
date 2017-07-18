@@ -3,6 +3,11 @@
 {% block body %}
 <h2>Add a Segment for Hiker {{ hiker.trail_name }} </h2>
 
+Note: We have not entered a database of points along the trail. Only very few points exist in our database now. If you enter a point that doesn't exist the blue line will not be drawn for what you have hiked. There is a workaround until we load a good database...
+<br><br>
+If on this page you enter rough start mile and end mile, as well as what the start & end points are in the description field, we will add the points that you need. <br>
+E.g., if you enter start at 0 and end at 2189.1 with a description of 'Springer to Katahdin' we will add those points and your lines will be drawn.
+<br><br>
 {% if error_message %}
     <p><strong>{{ error_message }}</strong></p>
 {% else %}
