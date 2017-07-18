@@ -14271,6 +14271,7 @@ def main():
     closest_point(35.154,-83.5807, 109.8, "Winding Stair Gap, US64, near Franklin, NC")
     closest_point(45.4772,-69.2851, 2104.4, "Katahdin Ironwords Rd")
     closest_point(41.9623,-73.374, 696.7, "Housatonic River Rd, Falls village, CT") #1492.4
+    closest_point(41.6418,-73.5208, 733.9, "Hoyt Rd, Wingdale, NY") #1492.4
 
 if __name__ == '__main__':
     main()
