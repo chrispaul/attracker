@@ -14272,6 +14272,16 @@ def main():
     closest_point(45.4772,-69.2851, 2104.4, "Katahdin Ironwords Rd")
     closest_point(41.9623,-73.374, 696.7, "Housatonic River Rd, Falls village, CT") #1492.4
     closest_point(41.6418,-73.5208, 733.9, "Hoyt Rd, Wingdale, NY") #1492.4
+    closest_point(42.293,-73.1614, 639.4, "Rt 20, Lee, Mass" )
+    closest_point(41.1955,-74.3715, 823.7, "NY/NJ border")
+    closest_point(39.7164,-77.5072, 1125.1, "MD/PA border")
+    closest_point(39.3165,-77.7558, 1166.0, "Harpers Ferry, WV")
+    closest_point(39.261547, -77.762162, 1172.3, "Keys Gap, WV Rt 9")
+'''
+and from the maryland border (md/pa=)
+Harpers Ferry 39.3165,-77.7558 1166.0 1023.1
+south to keys gap WV 9 39.261547, -77.762162 on the virginia/wv border.
+'''
 
 if __name__ == '__main__':
     main()
