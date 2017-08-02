@@ -13,7 +13,7 @@ E.g., if you enter start at 0 and end at 2189.1 with a description of 'Springer 
 {% else %}
     <form action="{% url 'segment_add' hiker.id %}" method="post">
         {% csrf_token %}
-        <input id="date" type="date" name="date" value="{{ next_date|date }}">
+        <input id="date" type="date" name="date" value="{{ next_date|date:"Y-m-d" }}">
         <label for="date">Date hiked </label>
         <br>
 
