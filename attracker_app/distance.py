@@ -14255,7 +14255,7 @@ def closest_point(lat, lng, sobo_mile, description):
             nearest_distance = distance
             nearest_point = i
 
-    print("{{'lat': {lat}, 'lng': {lng}, 'mile': {mile}, 'description': '{dsc}'}},".format(
+    print("{{'lat': {lat}, 'lng': {lng}, 'mile': {mile}, 'description': '{dsc}'}}, # distance from trail: {distance}".format(
         distance=round(nearest_distance,1),
         lat=COORDINATES[nearest_point]['lat'],
         lng=COORDINATES[nearest_point]['lng'],
@@ -14264,6 +14264,7 @@ def closest_point(lat, lng, sobo_mile, description):
         dsc=description))
 
 def main():
+    closest_point(45.3309, -69.5354, 114.5, "Monson, ME Rt 15") # 2074.6
     closest_point(42.274443, -73.183861, 643.7, "Goose Pond Rd - 4 miles south of US 20 in MA")
     closest_point(45.039440, -70.344531, 196.5, "Caribou Valley Rd near Stratton ME")
     closest_point(45.476940, -69.288330, 84.1, "KI Rd near Gulf Hagas and Hermitage")
@@ -14274,13 +14275,22 @@ def main():
     closest_point(41.6418,-73.5208, 733.9, "Hoyt Rd, Wingdale, NY") #1492.4
     closest_point(42.293,-73.1614, 639.4, "Rt 20, Lee, Mass" )
     closest_point(41.1955,-74.3715, 823.7, "NY/NJ border")
-    closest_point(39.7164,-77.5072, 1125.1, "MD/PA border")
     closest_point(39.3165,-77.7558, 1166.0, "Harpers Ferry, WV")
+    closest_point(39.324094, -77.726289, 1125.1, "MD/PA border")
+    closest_point(39.7164,-77.5072, 1125.1, "MD/PA border OLD")
     closest_point(39.261547, -77.762162, 1172.3, "Keys Gap, WV Rt 9")
 '''
 and from the maryland border (md/pa=)
 Harpers Ferry 39.3165,-77.7558 1166.0 1023.1
 south to keys gap WV 9 39.261547, -77.762162 on the virginia/wv border.
+
+at_coordinates.py
+COORDINATES = [
+  {'lat': 34.626693161734536, 'lng': -84.19382841822977, 'mile': 0, 'description': 'Springer Mountain'},
+
+at_features.py:
+FEATURES = [
+  {"mile": 0.0, "type": "FEATURE", "name": "Mile 0.0: Springer Mt (3782 ft): 34.62673/-84.193656", "lat": 34.62673, "lon": -84.193656},
 '''
 
 if __name__ == '__main__':

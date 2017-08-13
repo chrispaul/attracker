@@ -43,7 +43,7 @@ def build_polylines(segments):
                     polyline = {'color': HIKED_COLOR, 'coordinates': []} # Start a new hiked line
                 else: # Empty polyline: just change color.
                     polyline['color'] = HIKED_COLOR
-            # TODO Hackzone due to having very few coodinate['mile'] entries: advance segment to last segment if next segment has starts at this segment's end
+            # TODO Hackzone due to having very few coodinate['mile'] entries: advance segment to last segment if next segment starts at this segment's end
             while (segment_i < len(segments)-1) and (segments[segment_i].end_mile == segments[segment_i+1].start_mile):
                 segment_i += 1
                 segment = segments[segment_i]
@@ -121,6 +121,47 @@ def segment_add_post(request, hiker_id):
         import sys
         e = sys.exc_info()[0]
         return render(request, 'attracker/segment_add.html', {
+            'error_message': "Internal error {0}".format(e),
+        })
+    else:
+        return HttpResponseRedirect(reverse('hiker', args=(hiker.id,)))
+
+def segment_add2(request, hiker_id):
+    if request.method == 'POST':
+        return segment_add2_post(request, hiker_id)
+    elif request.method == 'GET':
+        return segment_add2_get(request, hiker_id)
+    else:
+        return render(request, 'attracker/segment_add2.html', {
+            'error_message': "Internal error: Invalid method {0}".format(request.method),
+        })
+
+def segment_add2_get(request, hiker_id):
+    hiker = get_object_or_404(Hiker, pk=hiker_id)
+    next_date = hiker.last_segment_date+timedelta(days=1) if hiker.last_segment_date else date.today()
+    return render(request, 'attracker/segment_add2.html', {
+        'hiker': hiker,
+        'next_date': next_date
+    })
+
+def segment_add2_post(request, hiker_id):
+    hiker = get_object_or_404(Hiker, pk=hiker_id)
+    try:
+        s = Segment(
+                hiker = hiker, 
+                date = request.POST['date'],
+                start_mile = request.POST['start_mile'] or 0.0, 
+                end_mile = request.POST['end_mile'] or 0.0, 
+                description = request.POST['description'], 
+                video_url = request.POST['video_url'], 
+                picture_url = request.POST['picture_url'], 
+                additional_miles = request.POST['additional_miles'] or 0.0 #TODO: what is the idiomatic way to make sure value is not ''?
+                )
+        s.save()
+    except:
+        import sys
+        e = sys.exc_info()[0]
+        return render(request, 'attracker/segment_add2.html', {
             'error_message': "Internal error {0}".format(e),
         })
     else:

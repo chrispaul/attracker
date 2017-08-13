@@ -68,3 +68,33 @@ class AppalachianTrail(models.Model):
 
     def __str__(self):
         return str(self.miles)
+
+
+class Point(models.Model):
+    """ Point on (or off) the trail. """
+    mile = models.FloatField('Miles from Springer', default=0)
+    lat = models.FloatField('Latitude (degrees with fraction, e.g. 34.62673', default=0)
+    lon = models.FloatField('Longitude (degrees with fraction, e.g. -84.193656', default=0)
+    description = models.CharField('Description of point')
+
+    @property
+    def sobo_mile(self):
+        return round((settings.AT_TRAIL_MILES - nobo_mile),1)  # Miles from Katahdin
+
+    def miles_to_trail(self):
+        ''' For points not on trail, number of miles to the nearest point on trail as the crow flies'''
+        return 0  #TODO >>>>>>>
+
+    def __str__(self):
+        return "mile={mile}".format(mile=self.mile)
+
+
+'''
+at_coordinates.py
+COORDINATES = [
+  {'lat': 34.626693161734536, 'lng': -84.19382841822977, 'mile': 0, 'description': 'Springer Mountain'},
+
+at_features.py:
+FEATURES = [
+  {"mile": 0.0, "type": "FEATURE", "name": "Mile 0.0: Springer Mt (3782 ft): 34.62673/-84.193656", "lat": 34.62673, "lon": -84.193656},
+'''

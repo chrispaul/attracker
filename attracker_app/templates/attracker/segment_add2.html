@@ -1,0 +1,72 @@
+{% extends "site.html" %}
+
+{% block body %}
+<h2>Add a Segment for Hiker {{ hiker.trail_name }} </h2>
+
+Note: We have not entered a database of points along the trail. Only very few points exist in our database now. If you enter a point that doesn't exist the blue line will not be drawn for what you have hiked. There is a workaround until we load a good database...
+<br><br>
+If on this page you enter rough start mile and end mile, as well as what the start & end points are in the description field, we will add the points that you need. <br>
+E.g., if you enter start at 0 and end at 2189.1 with a description of 'Springer to Katahdin' we will add those points and your lines will be drawn.
+<br><br>
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% else %}
+<form action="{% url 'segment_add2' hiker.id %}" method="post">  <!-- TODO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+        {% csrf_token %}
+        <input id="date" type="date" name="date" value="{{ next_date|date:"Y-m-d" }}">
+        <label for="date">Date hiked </label>
+        <br>
+
+        <select class="form-control" name="start_point">
+            <option value="0.0" selected>0.0 Springer </option>
+            <option value="2189.1">2189.9 Katahdin, Baxter Peak</option>
+        </select>
+        <label for="start_mile">Starting point</label>
+        <br>
+
+        <select class="form-control" name="end_point">
+            <option value=0.0>0.0 Springer </option>
+            <option value=2189.1 selected>2189.9 Katahdin, Baxter Peak</option>
+        </select>
+        <label for="end_point">Ending point</label>
+        <br>
+
+        <input id="description" name="description" type="text">
+        <label for="description">Description of hike</label>
+        <br>
+        <input type="submit" value="Create Segment">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+
+        <input id="start_mile" name="start_mile" type="number" step=any value={{ hiker.last_mile }}>
+        <label for="start_mile">Start mile </label>
+        <br>
+
+        <input id="end_mile" name="end_mile" type="number" step=any value={{ hiker.last_mile }}>
+        <label for="end_mile">End mile </label>
+        <br>
+
+        <input id="video_url" name="video_url" type="text">
+        <label for="video_url">Video URL </label>
+        <br>
+
+        <input id="picture_url" name="picture_url" type="text">
+        <label for="picture_url">Picture URL </label>
+        <br>
+
+        <input id="additional_miles" name="additional_miles" type="number" step=any>
+        <label for="additional_miles">Additional miles </label>
+        <br>
+
+    </form>
+
+{% endif %}
+<br><br>
+<a href="{% url 'hiker' hiker.id %}">Return to {{ hiker.trail_name }} without adding segment</a>
+{% endblock %}
