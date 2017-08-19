@@ -14241,10 +14241,11 @@ COORDINATES = [
 ]
 
 
-def closest_point(lat, lng, sobo_mile, description):
+def closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
     """Return the index of the closest point and the distance
     """
-    nobo_mile = round(2189.1 - sobo_mile,1)
+    if not nobo_mile:
+        nobo_mile = round(2189.1 - sobo_mile,1)
     point = (lat, lng)
     nearest_point = None
     nearest_distance = 999999
@@ -14275,10 +14276,15 @@ def main():
     closest_point(41.6418,-73.5208, 733.9, "Hoyt Rd, Wingdale, NY") #1492.4
     closest_point(42.293,-73.1614, 639.4, "Rt 20, Lee, Mass" )
     closest_point(41.1955,-74.3715, 823.7, "NY/NJ border")
-    closest_point(39.3165,-77.7558, 1166.0, "Harpers Ferry, WV")
+    #closest_point(39.3165,-77.7558, 1166.0, "Harpers Ferry, WV")
     closest_point(39.324094, -77.726289, 1125.1, "MD/PA border")
     closest_point(39.7164,-77.5072, 1125.1, "MD/PA border OLD")
     closest_point(39.261547, -77.762162, 1172.3, "Keys Gap, WV Rt 9")
+    closest_point(42.409380, -73.149918, 629.9, "Blotz Rd, MA")
+    closest_point(41.192414, -74.343045, 896.2, "NY/NJ state line")
+    closest_point(39.324094, -77.726289, 1023.4, "Harpers Ferry, WV/MD state line")
+
+
 '''
 and from the maryland border (md/pa=)
 Harpers Ferry 39.3165,-77.7558 1166.0 1023.1
