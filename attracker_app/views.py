@@ -6,6 +6,7 @@ from django.utils.safestring import mark_safe
 from django.utils.html import escapejs
 import json
 import os
+from . import at_points
 from . import at_coordinates
 from . import at_features
 
@@ -137,6 +138,8 @@ def segment_add2(request, hiker_id):
         })
 
 def segment_add2_get(request, hiker_id):
+    ''' Display the form to add a segment for a hiker.'''
+    import pdb; pdb.set_trace() #TODO CP rm>>>>>>>>>>>>>>>>>>>>>>>>>>
     hiker = get_object_or_404(Hiker, pk=hiker_id)
     next_date = hiker.last_segment_date+timedelta(days=1) if hiker.last_segment_date else date.today()
     return render(request, 'attracker/segment_add2.html', {
@@ -145,17 +148,22 @@ def segment_add2_get(request, hiker_id):
     })
 
 def segment_add2_post(request, hiker_id):
+    ''' Add a segment to the hiker '''
+    1/0
+    import pdb; pdb.set_trace() #TODO CP rm>>>>>>>>>>>>>>>>>>>>>>>>>>
     hiker = get_object_or_404(Hiker, pk=hiker_id)
     try:
+        start = at_points.POINTS.get(float(request.POST['start_point']))
+        end = at_points.POINTS.get(float(request.POST['end_point']))
         s = Segment(
                 hiker = hiker, 
                 date = request.POST['date'],
-                start_mile = request.POST['start_mile'] or 0.0, 
-                end_mile = request.POST['end_mile'] or 0.0, 
                 description = request.POST['description'], 
                 video_url = request.POST['video_url'], 
                 picture_url = request.POST['picture_url'], 
-                additional_miles = request.POST['additional_miles'] or 0.0 #TODO: what is the idiomatic way to make sure value is not ''?
+                start_mile = start,
+                end_mile = end
+                #additional_miles = request.POST['additional_miles'] or 0.0 #TODO: what is the idiomatic way to make sure value is not ''?
                 )
         s.save()
     except:

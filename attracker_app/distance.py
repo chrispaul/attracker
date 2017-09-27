@@ -1,6 +1,10 @@
 from geopy.distance import vincenty
 # Source data for this file comes from atdb.091015051935.ALL.csv from www.sophiaknows.com/atdb/waypoints.php
 # This file is now updated by script and by hand.
+#
+# Hack:
+# The mile markers are computed by using the distance.py module to find the nearest point on the AT to the lat/lon of a mile post.
+# To use distance.py: add a call to closest_point to spit out the line in this file to replace.
 COORDINATES = [
   {'lat': 34.626693161734536, 'lng': -84.19382841822977, 'mile': 0, 'description': 'Springer Mountain'},
   {'lat': 34.62855645479775, 'lng': -84.19447422923058},
@@ -14265,6 +14269,8 @@ def closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
         dsc=description))
 
 def main():
+    closest_point(40.9720277, -75.1259522, None, "Dunnfield Creek Natural Area Parking Lot at Delware Water Gap", 1290.9)
+    closest_point(41.058076, -74.964286, None, "Millbrook/Blairstown rd.  (County Road 602)", 1303.2)
     closest_point(45.3309, -69.5354, 114.5, "Monson, ME Rt 15") # 2074.6
     closest_point(42.274443, -73.183861, 643.7, "Goose Pond Rd - 4 miles south of US 20 in MA")
     closest_point(45.039440, -70.344531, 196.5, "Caribou Valley Rd near Stratton ME")

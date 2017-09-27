@@ -3,6 +3,7 @@ POINTS = [
   {"mile": 0.0, "type": "FEATURE", "name": "Mile 0.0: Springer Mtn (3782 ft): 34.62673/-84.193656", "lat": 34.62673, "lon": -84.193656},
   {"mile": 0.2, "type": "SHELTER", "name": "Mile 0.2: Springer Mountain Shelter: 34.6292728/-84.192975", "lat": 34.6292728, "lon": -84.192975},
   {"mile": 1.5, "type": "SHELTER", "name": "Mile 1.5: Black Gap Shelter: 34.6176819/-84.198711", "lat": 34.6176819, "lon": -84.198711},
+  # 1st night
   {"mile": 2.5, "type": "SHELTER", "name": "Mile 2.5: Stover Creek Shelter: 34.6495767/-84.1997597", "lat": 34.6495767, "lon": -84.1997597},
   {"mile": 7.6, "type": "SHELTER", "name": "Mile 7.6: Hawk Mountain Shelter: 34.6659577/-84.1363386", "lat": 34.6659577, "lon": -84.1363386},
   {"mile": 14.9, "type": "SHELTER", "name": "Mile 14.9: Gooch Mountain Shelter: 34.6533256/-84.0342084", "lat": 34.6533256, "lon": -84.0342084},
