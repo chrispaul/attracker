@@ -176,6 +176,7 @@ def segment_add2_post(request, hiker_id):
         return HttpResponseRedirect(reverse('hiker', args=(hiker.id,)))
 
 def segment_delete(request, hiker_id, segment_id):
+    1/0 # Don't permit deletes
     start_mile = 0
     hiker = get_object_or_404(Hiker, pk=hiker_id)
     segment = get_object_or_404(Segment, pk=segment_id)
