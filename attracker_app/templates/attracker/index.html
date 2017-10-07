@@ -16,14 +16,13 @@
 {% block body %}
 This is a crude early prototype. If you'd like to use the app early, send <a href="mailto:chrisfpaul@gmail.com">chrisfpaul@gmail.com</a> an email.
 <h2>Hikers</h2>
-<br>
 {% if error_message %}
     <p><strong>{{ error_message }}</strong></p>
 {% else %}
     {% if hikers %}
         <ul>
         {% for hiker in hikers %}
-          <li><a href="{% url 'hiker' hiker.id %}">{{ hiker.trail_name }}</a> - {{ hiker.user.first_name }} {{ hiker.user.last_name }} </li>
+        <li><a href="{% url 'hiker' hiker.id %}">{{ hiker.trail_name }}</a> - {{ hiker.user.first_name }} {{ hiker.user.last_name }}: {{hiker.miles_hiked}} miles </li>
         {% endfor %}
         </ul>
     {% else %}
