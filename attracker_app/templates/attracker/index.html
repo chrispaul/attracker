@@ -5,11 +5,13 @@
     #map { height: 60%; width: 50% }
     .wider{width: 50% }
     .narrower {width: 50% }
+    .narrowest {width: 35% }
+    .medium {width: 75% }
     .num { text-align: right; }
     .left_margin { margin-left: 15px; }
     h1 { line-height: 8px; }
     h2 { line-height: 5px; }
-    }
+    th { text-align: left; }
   </style>
 {% endblock %}
 
@@ -20,11 +22,26 @@ This is a crude early prototype. If you'd like to use the app early, send <a hre
     <p><strong>{{ error_message }}</strong></p>
 {% else %}
     {% if hikers %}
-        <ul>
-        {% for hiker in hikers %}
-        <li><a href="{% url 'hiker' hiker.id %}">{{ hiker.trail_name }}</a> - {{ hiker.user.first_name }} {{ hiker.user.last_name }}: {{hiker.miles_hiked}} miles </li>
-        {% endfor %}
-        </ul>
+        <table class=narrowest>
+            <thead>
+                <tr>
+                    <th>Trail name</th>
+                    <th>Street name</th>
+                    <th>Miles hiked</th>
+                    <th>Last hike date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hiker in hikers %}
+                    <tr>
+                        <td><a href="{% url 'hiker' hiker.id %}">{{ hiker.trail_name }}</a></td>
+                        <td>{{ hiker.user.first_name }} {{ hiker.user.last_name }}</td>
+                        <td>{{hiker.miles_hiked}}</td>
+                        <td>{{hiker.last_segment_date}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else %}
         <p>No hikers are available.</p>
     {% endif %}
