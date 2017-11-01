@@ -1,7 +1,9 @@
 from geopy.distance import vincenty
 # Source data for this file comes from atdb.091015051935.ALL.csv from www.sophiaknows.com/atdb/waypoints.php
 # This file is now updated by script and by hand.
-#
+# Script: python attracker_app/distance.py
+
+
 # Hack:
 # The mile markers are computed by using the distance.py module to find the nearest point on the AT to the lat/lon of a mile post.
 # To use distance.py: add a call to closest_point to spit out the line in this file to replace.
@@ -9949,7 +9951,7 @@ COORDINATES = [
   {'lat': 42.474561105075075, 'lng': -73.16121275281532},
   {'lat': 42.48066104053504, 'lng': -73.17534804853138},
   {'lat': 42.48066104053504, 'lng': -73.17534804853138},
-  {'lat': 42.48181093573702, 'lng': -73.1785211717316},
+  {'lat': 42.4818109357,     'lng': -73.1785211717, 'mile': 1569.7, 'description': 'Gulf Rd Parking Lot, Dalton, MA'}, # distance from trail: 0.0
   {'lat': 42.48181093574635, 'lng': -73.1785211717311},
   {'lat': 42.484649419154145, 'lng': -73.18093823492592},
   {'lat': 42.48464941915881, 'lng': -73.18093823492566},
@@ -14269,6 +14271,11 @@ def closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
         dsc=description))
 
 def main():
+    #closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
+    #closest_point(, , None, "", )
+    closest_point(42.481770, -73.178183, None, "Gulf Rd Parking Lot, Dalton, MA", 1569.7)
+    closest_point(42.409380, -73.149918, 629.9, "Blotz Rd, MA", 1562.3)
+    closest_point(42.293,-73614, 639.4, "Rt 20, Lee, Mass", 1549.7 )
     closest_point(40.9720277, -75.1259522, None, "Dunnfield Creek Natural Area Parking Lot at Delware Water Gap", 1290.9)
     closest_point(41.058076, -74.964286, None, "Millbrook/Blairstown rd.  (County Road 602)", 1303.2)
     closest_point(45.3309, -69.5354, 114.5, "Monson, ME Rt 15") # 2074.6
@@ -14280,13 +14287,11 @@ def main():
     closest_point(45.4772,-69.2851, 2104.4, "Katahdin Ironwords Rd")
     closest_point(41.9623,-73.374, 696.7, "Housatonic River Rd, Falls village, CT") #1492.4
     closest_point(41.6418,-73.5208, 733.9, "Hoyt Rd, Wingdale, NY") #1492.4
-    closest_point(42.293,-73.1614, 639.4, "Rt 20, Lee, Mass" )
     closest_point(41.1955,-74.3715, 823.7, "NY/NJ border")
     #closest_point(39.3165,-77.7558, 1166.0, "Harpers Ferry, WV")
     closest_point(39.324094, -77.726289, 1125.1, "MD/PA border")
     closest_point(39.7164,-77.5072, 1125.1, "MD/PA border OLD")
     closest_point(39.261547, -77.762162, 1172.3, "Keys Gap, WV Rt 9")
-    closest_point(42.409380, -73.149918, 629.9, "Blotz Rd, MA")
     closest_point(41.192414, -74.343045, 896.2, "NY/NJ state line")
     closest_point(39.324094, -77.726289, 1023.4, "Harpers Ferry, WV/MD state line")
 

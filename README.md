@@ -1,5 +1,6 @@
 # attracker
 ATSHiT - Appalachian Trail Section Hiker Tracker - Tracking progress on the AT for through and section hikers.
+Section hiker lives matter.
 
 See www.ATSHiT.com.
 
