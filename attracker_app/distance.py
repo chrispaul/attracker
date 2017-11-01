@@ -14273,8 +14273,12 @@ def closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
 def main():
     #closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
     #closest_point(, , None, "", )
+
     closest_point(41.5141,-73.7918, None, "Hortontown Rd, NY", 1428.4)
+    #{'lat': 41.5155159233, 'lng': -73.7936695858, 'mile': 1428.4, 'description': 'Hortontown Rd, NY'}, # distance from trail: 0.1
+
     closest_point( 41.5897,-73.6592, None, "NY 55, Poughquag, NY", 1440.7)
+    #{'lat': 41.5910892408, 'lng': -73.6580230041, 'mile': 1440.7, 'description': 'NY 55, Poughquag, NY'}, # distance from trail: 0.1
 	
     closest_point(42.481770, -73.178183, None, "Gulf Rd Parking Lot, Dalton, MA", 1569.7)
     closest_point(42.409380, -73.149918, 629.9, "Blotz Rd, MA", 1562.3)
