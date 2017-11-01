@@ -14273,6 +14273,9 @@ def closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
 def main():
     #closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
     #closest_point(, , None, "", )
+    closest_point(41.5141,-73.7918, None, "Hortontown Rd, NY", 1428.4)
+    closest_point( 41.5897,-73.6592, None, "NY 55, Poughquag, NY", 1440.7)
+	
     closest_point(42.481770, -73.178183, None, "Gulf Rd Parking Lot, Dalton, MA", 1569.7)
     closest_point(42.409380, -73.149918, 629.9, "Blotz Rd, MA", 1562.3)
     closest_point(42.293,-73614, 639.4, "Rt 20, Lee, Mass", 1549.7 )
