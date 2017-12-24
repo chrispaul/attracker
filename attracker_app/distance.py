@@ -6,7 +6,8 @@ from geopy.distance import vincenty
 
 # Hack:
 # The mile markers are computed by using the distance.py module to find the nearest point on the AT to the lat/lon of a mile post.
-# To use distance.py: add a call to closest_point to spit out the line in this file to replace.
+# To use distance.py: At the bottom of this file, add a call to closest_point to write to sysout a line to insert into at_coordinates.py.
+# To run, from the root directory of this repo type: python attracker_app/distance.py
 COORDINATES = [
   {'lat': 34.626693161734536, 'lng': -84.19382841822977, 'mile': 0, 'description': 'Springer Mountain'},
   {'lat': 34.62855645479775, 'lng': -84.19447422923058},
@@ -14273,7 +14274,9 @@ def closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
 def main():
     #closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
     #closest_point(, , None, "", )
-
+    closest_point(41.4206, -73.8689, None, "Dennytown Rd, NY", 1417.7)
+    closest_point(41.313, -73.989, None, "Bear Mountain Recreation Area, Hessian Lake", 1402.3)
+    """
     closest_point(41.5141,-73.7918, None, "Hortontown Rd, NY", 1428.4)
     #{'lat': 41.5155159233, 'lng': -73.7936695858, 'mile': 1428.4, 'description': 'Hortontown Rd, NY'}, # distance from trail: 0.1
 
@@ -14301,6 +14304,7 @@ def main():
     closest_point(39.261547, -77.762162, 1172.3, "Keys Gap, WV Rt 9")
     closest_point(41.192414, -74.343045, 896.2, "NY/NJ state line")
     closest_point(39.324094, -77.726289, 1023.4, "Harpers Ferry, WV/MD state line")
+    """
 
 
 '''
