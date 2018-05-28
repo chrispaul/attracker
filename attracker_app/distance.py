@@ -14263,7 +14263,7 @@ def closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
             nearest_distance = distance
             nearest_point = i
 
-    print("{{'lat': {lat}, 'lng': {lng}, 'mile': {mile}, 'description': '{dsc}'}}, # distance from trail: {distance}".format(
+    print("  {{'lat': {lat}, 'lng': {lng}, 'mile': {mile}, 'description': '{dsc}'}}, # distance from trail: {distance}".format(
         distance=round(nearest_distance,1),
         lat=COORDINATES[nearest_point]['lat'],
         lng=COORDINATES[nearest_point]['lng'],
@@ -14272,10 +14272,6 @@ def closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
         dsc=description))
 
 def main():
-    #closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
-    #closest_point(, , None, "", )
-    closest_point(41.4206, -73.8689, None, "Dennytown Rd, NY", 1417.7)
-    closest_point(41.313, -73.989, None, "Bear Mountain Recreation Area, Hessian Lake", 1402.3)
     """
     closest_point(41.5141,-73.7918, None, "Hortontown Rd, NY", 1428.4)
     #{'lat': 41.5155159233, 'lng': -73.7936695858, 'mile': 1428.4, 'description': 'Hortontown Rd, NY'}, # distance from trail: 0.1
@@ -14304,7 +14300,30 @@ def main():
     closest_point(39.261547, -77.762162, 1172.3, "Keys Gap, WV Rt 9")
     closest_point(41.192414, -74.343045, 896.2, "NY/NJ state line")
     closest_point(39.324094, -77.726289, 1023.4, "Harpers Ferry, WV/MD state line")
+    closest_point(39.324094, -77.726289, 1023.4, "Harpers Ferry, WV/MD state line")
+    closest_point(41.4206, -73.8689, None, "Dennytown Rd, NY", 1417.7)
+    closest_point(41.313, -73.989, None, "Bear Mountain Recreation Area, Hessian Lake", 1402.3)
+    closest_point(41.2443,-74.2869, None, "NY 17A, Bellvale", 1373.1)
+    5/18/18 mile 1588.4 to mile 1593.4
+    MA/VT line 42.743953, -73.156028
+    Pattison Rd 42.687540, -73.157297
+
+    5/7/18 mile 1566.8 to mile 1574.8
+    dalton to cheshire 5/5-5/6 18
+
+    start:42.482221, -73.178098
+    end:42.562065, -73.157071
+    closest_point(42.687540, -73.157297, None, "Pattison Rd, North Adams, MA", 1588.4)
+    closest_point(42.743953, -73.156028, None, "MA/VT line", 1593.4)
+
+    closest_point(42.482221, -73.178098, None, "Dalton, MA", 1566.8)
+    closest_point(42.562065, -73.157071, None, "Cheshire, MA", 1574.8)
+
+    closest_point(, , None, "", )
     """
+    #closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
+
+
 
 
 '''
