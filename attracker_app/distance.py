@@ -14304,24 +14304,29 @@ def main():
     closest_point(41.4206, -73.8689, None, "Dennytown Rd, NY", 1417.7)
     closest_point(41.313, -73.989, None, "Bear Mountain Recreation Area, Hessian Lake", 1402.3)
     closest_point(41.2443,-74.2869, None, "NY 17A, Bellvale", 1373.1)
+
     5/18/18 mile 1588.4 to mile 1593.4
     MA/VT line 42.743953, -73.156028
     Pattison Rd 42.687540, -73.157297
-
-    5/7/18 mile 1566.8 to mile 1574.8
-    dalton to cheshire 5/5-5/6 18
-
-    start:42.482221, -73.178098
-    end:42.562065, -73.157071
     closest_point(42.687540, -73.157297, None, "Pattison Rd, North Adams, MA", 1588.4)
     closest_point(42.743953, -73.156028, None, "MA/VT line", 1593.4)
 
+    5/7/18 mile 1566.8 to mile 1574.8
+    dalton to cheshire 5/5-5/6 18
+    start:42.482221, -73.178098
+    end:42.562065, -73.157071
     closest_point(42.482221, -73.178098, None, "Dalton, MA", 1566.8)
     closest_point(42.562065, -73.157071, None, "Cheshire, MA", 1574.8)
 
+    6/09/18:
+
     closest_point(, , None, "", )
+    closest_point(
     """
     #closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
+    closest_point(41.252436,-074.689575, None,"NJ Deckertown Turnpike", 1326.7)
+    closest_point(41.29841, -74.56872, None, "NJ 284", 1341.8)
+
 
 
 
