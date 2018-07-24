@@ -14248,9 +14248,10 @@ COORDINATES = [
 ]
 
 
-def closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
+def closest_point(lat, lng, description, nobo_mile=None):
     """Return the index of the closest point and the distance
     """
+    sobo_mile = None # was a param to this method
     if not nobo_mile:
         nobo_mile = round(2189.1 - sobo_mile,1)
     point = (lat, lng)
@@ -14319,31 +14320,68 @@ def main():
     closest_point(42.562065, -73.157071, None, "Cheshire, MA", 1574.8)
 
     6/09/18:
-
-    closest_point(, , None, "", )
-    closest_point(
-    """
-    #closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
     closest_point(41.252436,-074.689575, None,"NJ Deckertown Turnpike", 1326.7)
     closest_point(41.29841, -74.56872, None, "NJ 284", 1341.8)
 
+    7/23/18
+    closest_point(38.328534, -78.575, None, "Shenandoah-Smith Roach Gap", 898.2)
+    closest_point(38.527712, -78.44353, "Shenandoah-BigMeadows/Blackrock side trail", 920.2) #	2018-7-6
+    closest_point(41.29841, -74.56872, "NJ 284", 1341.8) # 2018-7-22
+    closest_point(41.219477, -74.455311, "NJ 94", 1352.6)
+  {'lat': 38.5264049337, 'lng': -78.4445144558, 'mile': 920.2, 'description': 'Shenandoah-BigMeadows/Blackrock side trail'}, # distance from trail: 0.1
+  {'lat': 41.2965076937, 'lng': -74.5626357144, 'mile': 1341.8, 'description': 'NJ 284'}, # distance from trail: 0.3
+  {'lat': 41.2192592247, 'lng': -74.4550365152, 'mile': 1352.6, 'description': 'NJ 94'}, # distance from trail: 0.0
+  {'lat': 38.328737647, 'lng': -78.576732336, 'mile': 898.2, 'description': 'Shenandoah-Smith Roach Gap'}, # distance from trail: 0.1
+
+jlpg
+attracker=# select * from attracker_app_hiker;
+ id | trail_name | user_id 
+----+------------+---------
+  1 | Woop       |    
+  2 | Adam       |   
+
+BEGIN;
+INSERT INTO attracker_app_segment 
+    (date, start_mile, end_mile, description, hiker_id, additional_miles) 
+VALUES 
+    ('2018-7-6',898.2, 920.2,'Shenandoah-Smith Roach Gap to BigMeadows/Blackrock', 2, 0)
+    ,('2018-7-22', 1341.8, 1352.6, 'NJ 284 to NJ 94', 2, 0)
+;
+
+# Adam local: hiker_id=2
+BEGIN;
+INSERT INTO attracker_app_segment 
+    (date, start_mile, end_mile, description, hiker_id, additional_miles) 
+VALUES 
+    ('2018-06-09', 1326.7, 1341.8, 'NJ Deckertown Turnpike to NJ284',2,0)
+;
+SELECT * FROM attracker_app_segment WHERE hiker_id=2;
+
+-- Bash: run locally
+alias jact='alias jact;source att_venv/bin/activate'
+jact
+alias jlocal='alias jlocal;heroku local'
+jlocal
+
+#browser
+http://0.0.0.0:5000
 
 
+
+    closest_point(, , "", )
+    closest_point(
+    """
+    #closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
+    
+
+				
 
 
 '''
-and from the maryland border (md/pa=)
-Harpers Ferry 39.3165,-77.7558 1166.0 1023.1
-south to keys gap WV 9 39.261547, -77.762162 on the virginia/wv border.
+Lat	Lon	Description	Mile Number	Date
 
-at_coordinates.py
-COORDINATES = [
-  {'lat': 34.626693161734536, 'lng': -84.19382841822977, 'mile': 0, 'description': 'Springer Mountain'},
-
-at_features.py:
-FEATURES = [
-  {"mile": 0.0, "type": "FEATURE", "name": "Mile 0.0: Springer Mt (3782 ft): 34.62673/-84.193656", "lat": 34.62673, "lon": -84.193656},
 '''
+
 
 if __name__ == '__main__':
     main()
