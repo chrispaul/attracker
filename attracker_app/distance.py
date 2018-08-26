@@ -14333,55 +14333,14 @@ def main():
   {'lat': 41.2192592247, 'lng': -74.4550365152, 'mile': 1352.6, 'description': 'NJ 94'}, # distance from trail: 0.0
   {'lat': 38.328737647, 'lng': -78.576732336, 'mile': 898.2, 'description': 'Shenandoah-Smith Roach Gap'}, # distance from trail: 0.1
 
-jlpg
-attracker=# select * from attracker_app_hiker;
- id | trail_name | user_id 
-----+------------+---------
-  1 | Woop       |    
-  2 | Adam       |   
-
-BEGIN;
-INSERT INTO attracker_app_segment 
-    (date, start_mile, end_mile, description, hiker_id, additional_miles) 
-VALUES 
-    ('2018-7-6',898.2, 920.2,'Shenandoah-Smith Roach Gap to BigMeadows/Blackrock', 2, 0)
-    ,('2018-7-22', 1341.8, 1352.6, 'NJ 284 to NJ 94', 2, 0)
-;
-
-# Adam local: hiker_id=2
-BEGIN;
-INSERT INTO attracker_app_segment 
-    (date, start_mile, end_mile, description, hiker_id, additional_miles) 
-VALUES 
-    ('2018-06-09', 1326.7, 1341.8, 'NJ Deckertown Turnpike to NJ284',2,0)
-;
-SELECT * FROM attracker_app_segment WHERE hiker_id=2;
-
--- Bash: run locally
-alias jact='alias jact;source att_venv/bin/activate'
-jact
-alias jlocal='alias jlocal;heroku local'
-jlocal
-
-#browser
-http://0.0.0.0:5000
-
-
-
-    closest_point(, , "", )
-    closest_point(
+    closest_point(41.2357, -74.4805, "County Rd 517, Glenwood, NJ", 1355.70) #	7/13
+    closest_point(41.3026, -74.6678, "NJ23", 1337.40)	
+  {'lat': 41.2356734061, 'lng': -74.4803172584, 'mile': 1355.7, 'description': 'County Rd 517, Glenwood, NJ'}, # distance from trail: 0.0
+  {'lat': 41.3033892933, 'lng': -74.6718675145, 'mile': 1337.4, 'description': 'NJ23'}, # distance from trail: 0.2
     """
-    #closest_point(lat, lng, sobo_mile, description, nobo_mile=None):
+    #closest_point(lat, lng, description, nobo_mile):
+
     
-
-				
-
-
-'''
-Lat	Lon	Description	Mile Number	Date
-
-'''
-
 
 if __name__ == '__main__':
     main()
